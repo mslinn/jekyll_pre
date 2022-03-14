@@ -17,6 +17,8 @@ This is a Jekyll plugin that provides 2 new Liquid tags that frequently work tog
     {% endpre %}
     ```
 
+More information is available on my web site about [my Jekyll plugins](https://www.mslinn.com/blog/2020/10/03/jekyll-plugins.html).
+
 ## Installation
 
 Add this line to your application's Gemfile, within the `jekyll_plugins` group:
@@ -122,7 +124,7 @@ Here are the CSS declarations that I defined pertaining to the `pre` and `nosele
 
 ### Comprehensive Example
 The code I wrote to generate the above CSS was a good example of how the plugins work together with
-the `from` and `to` tags from my `from_to_until` plugin:
+the `from` and `to` tags from my [`from_to_until`](https://github.com/mslinn/jekyll_from_to_until) plugin:
 
 ```
 {% capture css %}{% flexible_include '_sass/mystyle.scss' %}{% endcapture %}

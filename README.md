@@ -17,7 +17,9 @@ This is a Jekyll plugin that provides 2 new Liquid tags that frequently work tog
     {% endpre %}
     ```
 
+## Additional Information
 More information is available on my web site about [my Jekyll plugins](https://www.mslinn.com/blog/2020/10/03/jekyll-plugins.html).
+
 
 ## Installation
 
@@ -53,6 +55,7 @@ Which renders as:
 
 <pre data-lt-active="false" class="maxOneScreenHigh copyContainer" id="id377433c30186">Contents of pre tag</pre>
 
+
 ### Example 2
 This example generates a copy button and does not demonstrate `noselect`.
 
@@ -65,6 +68,7 @@ Generates:
 
 Which renders as (note the clipboard icon at the far right):
 ![example 2](images/usage2example.png)
+
 
 ### Example 3
 This example generates a copy button and does demonstrates the default usage of `noselect`, which renders an unselectable dollar sign followed by a space.
@@ -83,6 +87,7 @@ Generates:
 Which renders as:
 
 ![example 3](images/usage3example.png)
+
 
 ### Example 4
 This example generates a copy button and does demonstrates the `noselect` being used twice:
@@ -106,6 +111,7 @@ Which renders as:
 
 ![example 4](images/usage4example.png)
 
+
 ### CSS
 Here are the CSS declarations that I defined pertaining to the `pre` and `noselect` tags that produced the above images:
 
@@ -121,6 +127,7 @@ Here are the CSS declarations that I defined pertaining to the `pre` and `nosele
   user-select: none;
 }
 ```
+
 
 ### Comprehensive Example
 The code I wrote to generate the above CSS was a good example of how the plugins work together with
@@ -138,6 +145,7 @@ the `from` and `to` tags from my [`from_to_until`](https://github.com/mslinn/jek
 {% endpre %}
 ```
 
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
@@ -153,3 +161,4 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/mslinn
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "jekyll_plugin_logger"
 require_relative "jekyll_pre/version"
 
 module JekyllPre
@@ -89,3 +90,4 @@ end
 
 Liquid::Template.register_tag('pre', JekyllPre::PreTagBlock)
 Liquid::Template.register_tag('noselect', JekyllPre::UnselectableTag)
+Jekyll.info "Loaded jeykll_nth plugin."

@@ -3,9 +3,7 @@
 require "jekyll_plugin_logger"
 require_relative "jekyll_pre/version"
 
-module JekyllPre
-  class Error < StandardError; end
-
+module Jekyll
   # """
   #   \\{% pre %}
   #   Content here
@@ -86,8 +84,9 @@ module JekyllPre
       "<span class='unselectable'>#{@content}</span>"
     end
   end
+
+  info "Loaded jeykll_nth plugin."
 end
 
-Liquid::Template.register_tag('pre', JekyllPre::PreTagBlock)
-Liquid::Template.register_tag('noselect', JekyllPre::UnselectableTag)
-Jekyll.info "Loaded jeykll_nth plugin."
+Liquid::Template.register_tag('pre', Jekyll::PreTagBlock)
+Liquid::Template.register_tag('noselect', Jekyll::UnselectableTag)

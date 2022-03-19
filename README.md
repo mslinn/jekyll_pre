@@ -2,7 +2,7 @@ Jekyll_pre
 [![Gem Version](https://badge.fury.io/rb/jekyll_pre.svg)](https://badge.fury.io/rb/jekyll_pre)
 ===========
 
-This is a Jekyll plugin that provides 2 new Liquid tags that frequently work together:
+This Jekyll plugin provides 2 new Liquid tags that work together:
 
   * A `pre` block tag that can optionally display a copy button.
     ```
@@ -148,35 +148,58 @@ the `from` and `to` tags from my [`from_to_until`](https://github.com/mslinn/jek
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+After checking out the repo, run `bin/setup` to install dependencies.
 
-Install development dependencies like this:
-```
-$ BUNDLE_WITH="development" bundle install
+You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+
+
+### Build and Install Locally
+To build and install this gem onto your local machine, run:
+```shell
+$ rake install:local
 ```
 
-To install this gem onto your local machine, run:
+The following also does the same thing:
 ```shell
 $ bundle exec rake install
 ```
 
-To release a new version, 
+Examine the newly built gem:
+```shell
+$ gem info jekyll_pre
+
+*** LOCAL GEMS ***
+
+jekyll_pre (1.0.0)
+    Author: Mike Slinn
+    Homepage:
+    https://github.com/mslinn/jekyll_pre
+    License: MIT
+    Installed at: /home/mslinn/.gems
+
+    Generates Jekyll logger with colored output.
+```
+
+
+### Build and Push to RubyGems
+To release a new version,
   1. Update the version number in `version.rb`.
   2. Commit all changes to git; if you don't the next step might fail with an unexplainable error message.
   3. Run the following:
      ```shell
      $ bundle exec rake release
      ```
-     The above creates a git tag for the version, commits the created tag, 
+     The above creates a git tag for the version, commits the created tag,
      and pushes the new `.gem` file to [RubyGems.org](https://rubygems.org).
 
 
 ## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/mslinn/jekyll_pre.
+1. Fork the project
+2. Create a descriptively named feature branch
+3. Add your feature
+4. Submit a pull request
 
 
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
-

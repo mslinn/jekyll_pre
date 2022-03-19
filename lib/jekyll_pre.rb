@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "jekyll_plugin_logger"
-require_relative "jekyll_pre/version"
 
 module Jekyll
   # """
@@ -35,14 +34,14 @@ module Jekyll
 
     def self.make_pre(make_copy_button, label, content)
       label = if label.to_s.empty?
-                ''
-              elsif label.to_s.downcase.strip == 'shell'
+                ""
+              elsif label.to_s.downcase.strip == "shell"
                 "<div class='codeLabel unselectable' data-lt-active='false'>Shell</div>"
               else
                 "<div class='codeLabel unselectable' data-lt-active='false'>#{label}</div>"
               end
       pre_id = "id#{SecureRandom.hex(6)}"
-      copy_button = make_copy_button ? PreTagBlock.make_copy_button(pre_id) : ''
+      copy_button = make_copy_button ? PreTagBlock.make_copy_button(pre_id) : ""
       "#{label}<pre data-lt-active='false' class='maxOneScreenHigh copyContainer' id='#{pre_id}'>#{copy_button}#{content.strip}</pre>"
     end
 
@@ -52,11 +51,11 @@ module Jekyll
     # @return [void]
     def initialize(tag_name, text, tokens)
       super(tag_name, text, tokens)
-      text = '' if text.nil?
+      text = "" if text.nil?
       text.strip!
-      @make_copy_button = text.include? 'copyButton'
-      remaining_text = text.sub('copyButton', '').strip
-      #puts "@make_copy_button = '#{@make_copy_button}'; text = '#{text}'; remaining_text = '#{remaining_text}'"
+      @make_copy_button = text.include? "copyButton"
+      remaining_text = text.sub("copyButton", "").strip
+      debug { "@make_copy_button = '#{@make_copy_button}'; text = '#{text}'; remaining_text = '#{remaining_text}'" }
       @label = remaining_text
     end
 
@@ -64,7 +63,7 @@ module Jekyll
     # @return [String]
     def render(context)
       content = super
-      # puts "@make_copy_button = '#{@make_copy_button}'; @label = '#{@label}'"
+      debug { "@make_copy_button = '#{@make_copy_button}'; @label = '#{@label}'" }
       PreTagBlock.make_pre(@make_copy_button, @label, content)
     end
   end
@@ -75,9 +74,9 @@ module Jekyll
     def initialize(tag_name, text, tokens)
       super(tag_name, text, tokens)
       @content = text
-      # puts "UnselectableTag: content1= '#{@content}'"
-      @content = '$ ' if @content.nil? || @content.empty?
-      # puts "UnselectableTag: content2= '#{@content}'"
+      debug { "UnselectableTag: content1= '#{@content}'" }
+      @content = "$ " if @content.nil? || @content.empty?
+      debug { "UnselectableTag: content2= '#{@content}'" }
     end
 
     def render(_)
@@ -85,8 +84,8 @@ module Jekyll
     end
   end
 
-  info "Loaded jeykll_nth plugin."
+  info { "Loaded jeykll_pre plugin." }
 end
 
-Liquid::Template.register_tag('pre', Jekyll::PreTagBlock)
-Liquid::Template.register_tag('noselect', Jekyll::UnselectableTag)
+Liquid::Template.register_tag("pre", Jekyll::PreTagBlock)
+Liquid::Template.register_tag("noselect", Jekyll::UnselectableTag)

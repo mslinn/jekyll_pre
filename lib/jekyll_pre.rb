@@ -55,7 +55,7 @@ module Jekyll
       text.strip!
       @make_copy_button = text.include? "copyButton"
       remaining_text = text.sub("copyButton", "").strip
-      debug { "@make_copy_button = '#{@make_copy_button}'; text = '#{text}'; remaining_text = '#{remaining_text}'" }
+      Jekyll.debug { "@make_copy_button = '#{@make_copy_button}'; text = '#{text}'; remaining_text = '#{remaining_text}'" }
       @label = remaining_text
     end
 
@@ -63,7 +63,7 @@ module Jekyll
     # @return [String]
     def render(context)
       content = super
-      debug { "@make_copy_button = '#{@make_copy_button}'; @label = '#{@label}'" }
+      Jekyll.debug { "@make_copy_button = '#{@make_copy_button}'; @label = '#{@label}'" }
       PreTagBlock.make_pre(@make_copy_button, @label, content)
     end
   end
@@ -74,9 +74,9 @@ module Jekyll
     def initialize(tag_name, text, tokens)
       super(tag_name, text, tokens)
       @content = text
-      debug { "UnselectableTag: content1= '#{@content}'" }
+      Jekyll.debug { "UnselectableTag: content1= '#{@content}'" }
       @content = "$ " if @content.nil? || @content.empty?
-      debug { "UnselectableTag: content2= '#{@content}'" }
+      Jekyll.debug { "UnselectableTag: content2= '#{@content}'" }
     end
 
     def render(_)

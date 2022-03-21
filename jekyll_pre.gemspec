@@ -1,41 +1,55 @@
+# frozen_string_literal: true
 
 require_relative "lib/jekyll_pre/version"
 
-# rubocop:disable Metrics/BlockLength
-Gem::Specification.new do |spec|
-  spec.name = "jekyll_pre"
-  spec.version = JekyllPre::VERSION
-  spec.authors = ["Mike Slinn"]
-  spec.email = ["mslinn@mslinn.com"]
-
-  spec.summary = "Jekyll tags pre and noselect, for HTML <pre/> tag, prompts and unselectable text."
-  spec.description = spec.summary
-  spec.homepage = "https://github.com/mslinn/jekyll_pre"
-  spec.license = "MIT"
-  spec.required_ruby_version = ">= 2.6.0"
-
-  spec.metadata["allowed_push_host"] = "https://rubygems.org"
-
-  spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["source_code_uri"] = spec.homepage
-  spec.metadata["changelog_uri"] = "#{spec.homepage}/CHANGELOG.md"
-
+module GemSpecHelper
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
-  spec.files = Dir.chdir(File.expand_path(__dir__)) do
-    `git ls-files -z`.split("\x0").reject do |f|
-      (f == __FILE__) || f.match(%r{\A(?:(?:bin|test|spec|features)/|\.(?:git|travis|circleci)|appveyor)})
+  def self.spec_files
+    Dir.chdir(File.expand_path(__dir__)) do
+      `git ls-files -z`.split("\x0").reject do |f|
+        (f == __FILE__) || f.match(%r!\A(?:(?:bin|test|spec|features)/|\.(?:git|travis|circleci)|appveyor)!)
+      end
     end
   end
-  spec.bindir = "exe"
-  spec.executables = spec.files.grep(%r!\Aexe/!) { |f| File.basename(f) }
-  spec.require_paths = ["lib"]
 
+  def self.spec_executables(files)
+    files.grep(%r!\Aexe/!) { |f| File.basename(f) }
+  end
+end
+
+# rubocop:disable Metrics/BlockLength
+Gem::Specification.new do |spec|
+  files = GemSpecHelper.spec_files
+  github = "https://github.com/mslinn/jekyll_pre"
+
+  spec.authors = ["Mike Slinn"]
+  spec.bindir = "exe"
+  spec.description = <<~END_OF_DESC
+    Jekyll tags pre and noselect, for HTML <pre/> tag, prompts and unselectable text.
+  END_OF_DESC
+  spec.email = ["mslinn@mslinn.com"]
+  spec.executables = GemSpecHelper.spec_executables(files)
+  spec.files = files
+  spec.homepage = "https://www.mslinn.com/blog/2020/10/03/jekyll-plugins.html"
+  spec.license = "MIT"
+  spec.metadata = {
+    "allowed_push_host" => "https://rubygems.org",
+    "bug_tracker_uri"   => "#{github}/issues",
+    "changelog_uri"     => "#{github}/CHANGELOG.md",
+    "homepage_uri"      => spec.homepage,
+    "source_code_uri"   => github,
+  }
+  spec.name = "jekyll_pre"
   spec.post_install_message = <<~END_MESSAGE
 
     Thanks for installing #{spec.name}!
 
   END_MESSAGE
+  spec.required_ruby_version = ">= 2.6.0"
+  spec.require_paths = ["lib"]
+  spec.summary = "Jekyll tags pre and noselect, for HTML <pre/> tag, prompts and unselectable text."
+  spec.version = JekyllPre::VERSION
 
   spec.add_dependency "jekyll", ">= 3.5.0"
   spec.add_dependency "jekyll_plugin_logger"

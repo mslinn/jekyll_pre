@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 require "jekyll_plugin_logger"
+require_relative "jekyll_pre/version"
+
+module JekyllPluginPreName
+  PLUGIN_NAME = "jekyll_pre"
+end
 
 module Jekyll
   # """
@@ -83,9 +88,8 @@ module Jekyll
       "<span class='unselectable'>#{@content}</span>"
     end
   end
-
-  info { "Loaded jeykll_pre plugin." }
 end
 
+Jekyll.info { "Loaded #{JekyllPluginPreName::PLUGIN_NAME} v#{JekyllPre::VERSION} plugin." }
 Liquid::Template.register_tag("pre", Jekyll::PreTagBlock)
 Liquid::Template.register_tag("noselect", Jekyll::UnselectableTag)

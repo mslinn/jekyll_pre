@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "liquid"
 require "jekyll_plugin_logger"
 require_relative "jekyll_pre/version"
 
@@ -90,6 +91,6 @@ module Jekyll
   end
 end
 
-Jekyll.info { "Loaded #{JekyllPluginPreName::PLUGIN_NAME} v#{JekyllPre::VERSION} plugin." }
+PluginMetaLogger.instance.info { "Loaded #{JekyllPluginPreName::PLUGIN_NAME} v#{JekyllPre::VERSION} plugin." }
 Liquid::Template.register_tag("pre", Jekyll::PreTagBlock)
 Liquid::Template.register_tag("noselect", Jekyll::UnselectableTag)

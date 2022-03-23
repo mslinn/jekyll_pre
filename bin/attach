@@ -16,7 +16,7 @@ fi
 NAME=jekyll_pre
 
 gem uninstall $NAME -aIx --user-install --force
-git add -A && git commit -m - && git push
+git add -A && git commit -m - && git push origin "$(git rev-parse --abbrev-ref HEAD)"
 
 set -e
 

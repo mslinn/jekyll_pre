@@ -15,8 +15,11 @@ fi
 
 NAME=jekyll_pre
 
-# eval "$( grep VERSION lib/$NAME/version.rb | sed 's/ *//g' )"
+gem uninstall $NAME -aIx --user-install --force
+git add -A && git commit -m - && git push
 
-gem uninstall "$NAME" &&
-bundle exec rake install:local && \
-(cd "$1" || exit 1; _bin/debug)
+set -e
+
+bundle exec rake install:local
+cd "$1" > /dev/null || exit 1;
+_bin/debug

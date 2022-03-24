@@ -46,19 +46,15 @@ Gem::Specification.new do |spec|
     Thanks for installing #{spec.name}!
 
   END_MESSAGE
-  spec.required_ruby_version = ">= 2.6.0"
   spec.require_paths = ["lib"]
+  spec.required_ruby_version = ">= 2.6.0"
   spec.summary = "Jekyll tags pre and noselect, for HTML <pre/> tag, prompts and unselectable text."
   spec.version = JekyllPre::VERSION
 
   spec.add_dependency "jekyll", ">= 3.5.0"
   spec.add_dependency "jekyll_plugin_logger"
 
-  spec.add_development_dependency "bundler"
   spec.add_development_dependency "debase"
-  spec.add_development_dependency "rake"
-  spec.add_development_dependency "rspec", "~> 3.0"
-  spec.add_development_dependency "rubocop"
   spec.add_development_dependency "rubocop-jekyll"
   spec.add_development_dependency "rubocop-rake"
   spec.add_development_dependency "rubocop-rspec"

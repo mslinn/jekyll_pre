@@ -20,7 +20,6 @@ end
 
 # rubocop:disable Metrics/BlockLength
 Gem::Specification.new do |spec|
-  files = GemSpecHelper.spec_files
   github = "https://github.com/mslinn/jekyll_pre"
 
   spec.authors = ["Mike Slinn"]
@@ -29,9 +28,8 @@ Gem::Specification.new do |spec|
     Jekyll tags pre and noselect, for HTML <pre/> tag, prompts and unselectable text.
   END_OF_DESC
   spec.email = ["mslinn@mslinn.com"]
-  spec.executables = GemSpecHelper.spec_executables(files)
   spec.files = files
-  spec.homepage = "https://www.mslinn.com/blog/2020/10/03/jekyll-plugins.html"
+  spec.homepage = "https://www.mslinn.com/blog/2020/10/03/jekyll-plugins.html#pre"
   spec.license = "MIT"
   spec.metadata = {
     "allowed_push_host" => "https://rubygems.org",
@@ -49,15 +47,16 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
   spec.required_ruby_version = ">= 2.6.0"
   spec.summary = "Jekyll tags pre and noselect, for HTML <pre/> tag, prompts and unselectable text."
+  spec.test_files = spec.files.grep(%r!^(test|spec|features)/!)
   spec.version = JekyllPre::VERSION
 
   spec.add_dependency "jekyll", ">= 3.5.0"
   spec.add_dependency "jekyll_plugin_logger"
 
   spec.add_development_dependency "debase"
-  spec.add_development_dependency "rubocop-jekyll"
-  spec.add_development_dependency "rubocop-rake"
-  spec.add_development_dependency "rubocop-rspec"
+  # spec.add_development_dependency "rubocop-jekyll"
+  # spec.add_development_dependency "rubocop-rake"
+  # spec.add_development_dependency "rubocop-rspec"
   spec.add_development_dependency "ruby-debug-ide"
 end
 # rubocop:enable Metrics/BlockLength

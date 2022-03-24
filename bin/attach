@@ -13,13 +13,12 @@ if [ ! -f "$1/_bin/debug" ]; then
   exit 1
 fi
 
-NAME=jekyll_pre
+GIT_ROOT="$( git rev-parse --show-toplevel )"
+cd "${GIT_ROOT}"
 
-gem uninstall "$NAME" -aIx --user-install --force
-git add -A && git commit -m - && git push origin "$(git rev-parse --abbrev-ref HEAD)"
+bin/build
 
 set -e
 
-bundle exec rake install:local
-cd "$1" > /dev/null || exit 1;
+cd "$1" > /dev/null || exit 1
 _bin/debug

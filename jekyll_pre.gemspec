@@ -28,7 +28,7 @@ Gem::Specification.new do |spec|
     Jekyll tags pre and noselect, for HTML <pre/> tag, prompts and unselectable text.
   END_OF_DESC
   spec.email = ["mslinn@mslinn.com"]
-  spec.files = files
+  spec.files = Dir[".rubocop.yml", "LICENSE.*", "Rakefile", "{lib,spec}/**/*", "*.gemspec", "*.md"]
   spec.homepage = "https://www.mslinn.com/blog/2020/10/03/jekyll-plugins.html#pre"
   spec.license = "MIT"
   spec.metadata = {

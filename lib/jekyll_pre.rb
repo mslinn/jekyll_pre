@@ -60,7 +60,7 @@ class PreTagBlock < Liquid::Block
     text.strip!
     @make_copy_button = text.include? "copyButton"
     remaining_text = text.sub("copyButton", "").strip
-    @logger = PluginMetaLogger.new_logger(self)
+    @logger = PluginMetaLogger.instance.new_logger(self)
     @logger.debug { "@make_copy_button = '#{@make_copy_button}'; text = '#{text}'; remaining_text = '#{remaining_text}'" }
     @label = remaining_text
   end
@@ -80,7 +80,7 @@ class UnselectableTag < Liquid::Tag
   def initialize(tag_name, text, tokens)
     super(tag_name, text, tokens)
     @content = text
-    @logger = PluginMetaLogger.new_logger(self)
+    @logger = PluginMetaLogger.instance.new_logger(self)
     @logger.debug { "UnselectableTag: content1= '#{@content}'" }
     @content = "$ " if @content.nil? || @content.empty?
     @logger.debug { "UnselectableTag: content2= '#{@content}'" }

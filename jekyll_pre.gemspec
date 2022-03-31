@@ -2,22 +2,6 @@
 
 require_relative "lib/jekyll_pre/version"
 
-module GemSpecHelper
-  # Specify which files should be added to the gem when it is released.
-  # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
-  def self.spec_files
-    Dir.chdir(File.expand_path(__dir__)) do
-      `git ls-files -z`.split("\x0").reject do |f|
-        (f == __FILE__) || f.match(%r!\A(?:(?:bin|test|spec|features)/|\.(?:git|travis|circleci)|appveyor)!)
-      end
-    end
-  end
-
-  def self.spec_executables(files)
-    files.grep(%r!\Aexe/!) { |f| File.basename(f) }
-  end
-end
-
 # rubocop:disable Metrics/BlockLength
 Gem::Specification.new do |spec|
   github = "https://github.com/mslinn/jekyll_pre"

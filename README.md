@@ -17,6 +17,25 @@ This Jekyll plugin provides 2 new Liquid tags that work together:
     {% endpre %}
     ```
 
+## CSS
+Below are the CSS declarations that I defined pertaining to the pre and noselect tags that produced the above images:
+```css
+.maxOneScreenHigh {
+  max-height: 500px;
+}
+
+.numbered_line {
+  color: rgb(65, 77, 65);
+}
+
+.unselectable {
+  color: #7922f9;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  user-select: none;
+}
+```
+
 ## Additional Information
 More information is available on my web site about [my Jekyll plugins](https://www.mslinn.com/blog/2020/10/03/jekyll-plugins.html).
 

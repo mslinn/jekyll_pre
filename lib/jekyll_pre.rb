@@ -58,7 +58,7 @@ class PreTagBlock < Liquid::Block
     numbered_content = lines.map do |line|
       i += 1
       number = i.to_s.rjust(digits, " ")
-      "<span class='unselectable'> #{number}: </span>#{line}"
+      "<span class='unselectable numbered_line'> #{number}: </span>#{line}"
     end
     result = numbered_content.join("\n")
     result += "\n" unless result.end_with?("\n")

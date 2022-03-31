@@ -32,16 +32,16 @@ RSpec.describe(PreTagBlock) do
     END_CONTENT
     numbered_content = PreTagBlock.number_content(content)
     expected_content = <<~END_CONTENT
-      <span class='unselectable'>  1: </span>Line 1
-      <span class='unselectable'>  2: </span>  Line 2
-      <span class='unselectable'>  3: </span>    Line 3
-      <span class='unselectable'>  4: </span>    Line 4
-      <span class='unselectable'>  5: </span>  Line 5
-      <span class='unselectable'>  6: </span>Line 6
-      <span class='unselectable'>  7: </span>Line 7
-      <span class='unselectable'>  8: </span>  Line 8
-      <span class='unselectable'>  9: </span>  Line 9
-      <span class='unselectable'> 10: </span>Line 10
+      <span class='unselectable numbered_line'>  1: </span>Line 1
+      <span class='unselectable numbered_line'>  2: </span>  Line 2
+      <span class='unselectable numbered_line'>  3: </span>    Line 3
+      <span class='unselectable numbered_line'>  4: </span>    Line 4
+      <span class='unselectable numbered_line'>  5: </span>  Line 5
+      <span class='unselectable numbered_line'>  6: </span>Line 6
+      <span class='unselectable numbered_line'>  7: </span>Line 7
+      <span class='unselectable numbered_line'>  8: </span>  Line 8
+      <span class='unselectable numbered_line'>  9: </span>  Line 9
+      <span class='unselectable numbered_line'> 10: </span>Line 10
     END_CONTENT
     expect(numbered_content).to eq(expected_content)
   end

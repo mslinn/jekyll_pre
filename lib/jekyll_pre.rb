@@ -31,13 +31,13 @@ end
 class PreTagBlock < Liquid::Block
   @@prefix = "<button class='copyBtn' data-clipboard-target="
   @@suffix = " title='Copy to clipboard'><img src='/assets/images/clippy.svg' " \
-              "alt='Copy to clipboard' style='width: 13px'></button>"
+             "alt='Copy to clipboard' style='width: 13px'></button>"
 
   def self.make_copy_button(pre_id)
     "#{@@prefix}'##{pre_id}'#{@@suffix}"
   end
 
-  def self.make_pre(make_copy_button, label, content)
+  def self.make_pre(make_copy_button, number_lines, label, content)
     label = if label.to_s.empty?
               ""
             elsif label.to_s.downcase.strip == "shell"
@@ -47,22 +47,44 @@ class PreTagBlock < Liquid::Block
             end
     pre_id = "id#{SecureRandom.hex(6)}"
     copy_button = make_copy_button ? PreTagBlock.make_copy_button(pre_id) : ""
+    content = PreTagBlock.number_content(content) if number_lines
     "#{label}<pre data-lt-active='false' class='maxOneScreenHigh copyContainer' id='#{pre_id}'>#{copy_button}#{content.strip}</pre>"
   end
 
-  # @param tag_name [String] is the name of the tag, which we already know.
-  # @param text [Hash, String, Liquid::Tag::Parser] the arguments from the web page.
-  # @param tokens [Liquid::ParseContext] tokenized command line
+  def self.number_content(content)
+    lines = content.split("\n")
+    digits = lines.length.to_s.length
+    i = 0
+    numbered_content = lines.map do |line|
+      i += 1
+      number = i.to_s.rjust(digits, " ")
+      "<span class='unselectable'> #{number}: </span>#{line}"
+    end
+    result = numbered_content.join("\n")
+    result += "\n" unless result.end_with?("\n")
+    result
+  end
+
+  # @param _tag_name [String] is the name of the tag, which we already know.
+  # @param argument_string [String] the arguments from the web page.
+  # @param _tokens [Liquid::ParseContext] tokenized command line
   # @return [void]
-  def initialize(tag_name, text, tokens)
-    super(tag_name, text, tokens)
-    text = "" if text.nil?
-    text.strip!
-    @make_copy_button = text.include? "copyButton"
-    remaining_text = text.sub("copyButton", "").strip
+  def initialize(_tag_name, argument_string, _tokens)
+    super
+    argument_string = "" if argument_string.nil?
+    argument_string.strip!
+
     @logger = PluginMetaLogger.instance.new_logger(self)
-    @logger.debug { "@make_copy_button = '#{@make_copy_button}'; text = '#{text}'; remaining_text = '#{remaining_text}'" }
+
+    @make_copy_button = argument_string.include? "copyButton"
+    remaining_text = argument_string.sub("copyButton", "").strip
+
+    @number_lines = remaining_text.include? "number"
+    remaining_text = remaining_text.sub("number", "").strip
+
     @label = remaining_text
+
+    @logger.debug { "@make_copy_button = '#{@make_copy_button}'; argument_string = '#{argument_string}'; remaining_text = '#{remaining_text}'" }
   end
 
   # Method prescribed by the Jekyll plugin lifecycle.
@@ -70,24 +92,28 @@ class PreTagBlock < Liquid::Block
   def render(context)
     content = super
     @logger.debug { "@make_copy_button = '#{@make_copy_button}'; @label = '#{@label}'" }
-    PreTagBlock.make_pre(@make_copy_button, @label, content)
+    PreTagBlock.make_pre(@make_copy_button, @number_lines, @label, content)
   end
 end
 
 # """\\{% noselect %} or \\{% noselect this all gets copied.
 # Also, space before the closing percent is signficant %}"""
 class UnselectableTag < Liquid::Tag
-  def initialize(tag_name, text, tokens)
-    super(tag_name, text, tokens)
-    @content = text
+  # @param _tag_name [String] is the name of the tag, which we already know.
+  # @param argument_string [String] the arguments from the web page.
+  # @param _tokens [Liquid::ParseContext] tokenized command line
+  # @return [void]
+  def initialize(_tag_name, argument_string, _tokens)
+    super
     @logger = PluginMetaLogger.instance.new_logger(self)
-    @logger.debug { "UnselectableTag: content1= '#{@content}'" }
-    @content = "$ " if @content.nil? || @content.empty?
-    @logger.debug { "UnselectableTag: content2= '#{@content}'" }
+
+    @argument_string = argument_string
+    @argument_string = "$ " if @argument_string.nil? || @argument_string.empty?
+    @logger.debug { "UnselectableTag: argument_string= '#{@argument_string}'" }
   end
 
   def render(_)
-    "<span class='unselectable'>#{@content}</span>"
+    "<span class='unselectable'>#{@argument_string}</span>"
   end
 end
 

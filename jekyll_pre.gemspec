@@ -25,7 +25,7 @@ Gem::Specification.new do |spec|
   spec.authors = ["Mike Slinn"]
   spec.bindir = "exe"
   spec.description = <<~END_OF_DESC
-    Jekyll tags pre and noselect, for HTML <pre/> tag, prompts and unselectable text.
+    Jekyll tags pre and noselect, for HTML <pre/> tag, prompts and unselectable text. Can number lines.
   END_OF_DESC
   spec.email = ["mslinn@mslinn.com"]
   spec.files = Dir[".rubocop.yml", "LICENSE.*", "Rakefile", "{lib,spec}/**/*", "*.gemspec", "*.md"]
@@ -46,12 +46,14 @@ Gem::Specification.new do |spec|
   END_MESSAGE
   spec.require_paths = ["lib"]
   spec.required_ruby_version = ">= 2.6.0"
-  spec.summary = "Jekyll tags pre and noselect, for HTML <pre/> tag, prompts and unselectable text."
+  spec.summary = "Jekyll tags pre and noselect, for HTML <pre/> tag, prompts and unselectable text. Can number lines."
   spec.test_files = spec.files.grep(%r!^(test|spec|features)/!)
   spec.version = JekyllPre::VERSION
 
   spec.add_dependency "jekyll", ">= 3.5.0"
   spec.add_dependency "jekyll_plugin_logger"
+  spec.add_dependency "key-value-parser"
+  spec.add_dependency "shellwords"
 
   spec.add_development_dependency "debase"
   # spec.add_development_dependency "rubocop-jekyll"

@@ -24,8 +24,10 @@ Below are the CSS declarations that I defined pertaining to the pre and noselect
   max-height: 500px;
 }
 
-.numbered_line {
-  color: rgb(65, 77, 65);
+.numbered_line,
+.unselectable.numbered_line,
+.numbered_line.unselectable {
+  color: #5fb25f;
 }
 
 .unselectable {

@@ -117,6 +117,6 @@ class UnselectableTag < Liquid::Tag
   end
 end
 
-PluginMetaLogger.instance.info { "Loaded #{JekyllPluginPreName::PLUGIN_NAME} v#{JekyllPre::VERSION} plugin." }
+PluginMetaLogger.instance.info { "Loaded #{JekyllPluginPreName::PLUGIN_NAME} v#{JekyllPreVersion::VERSION} plugin." }
 Liquid::Template.register_tag("pre", PreTagBlock)
 Liquid::Template.register_tag("noselect", UnselectableTag)

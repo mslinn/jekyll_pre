@@ -1,3 +1,6 @@
+## 1.1.1 / 2022-03-31
+  * Added `numbered_line` CSS class for unselectable line numbers
+
 ## 1.1.0 / 2022-03-31
   * Added `number` option, which generates unselectable line numbers for contents
 

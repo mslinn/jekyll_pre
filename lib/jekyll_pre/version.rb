@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
-module JekyllPre
-  VERSION = "1.1.0"
+module JekyllPreVersion
+  VERSION = "1.1.1"
 end

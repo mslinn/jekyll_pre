@@ -74,7 +74,7 @@ class PreTagBlock < Liquid::Block
     argument_string = "" if argument_string.nil?
     argument_string.strip!
 
-    @logger = PluginMetaLogger.instance.new_logger(self)
+    @logger = PluginMetaLogger.instance.new_logger(self, PluginMetaLogger.instance.config)
 
     @make_copy_button = argument_string.include? "copyButton"
     remaining_text = argument_string.sub("copyButton", "").strip

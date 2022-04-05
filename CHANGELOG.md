@@ -1,3 +1,6 @@
+## 1.1.2 / 2022-04-05
+  * Updated to `jekyll_plugin_logger` v2.1.0
+
 ## 1.1.1 / 2022-03-31
   * Added `numbered_line` CSS class for unselectable line numbers
 

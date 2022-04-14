@@ -40,7 +40,7 @@ Below are the CSS declarations that I defined pertaining to the pre and noselect
 ```
 
 ## Additional Information
-More information is available on my web site about [my Jekyll plugins](https://www.mslinn.com/blog/2020/10/03/jekyll-plugins.html).
+More information is available on [my web site](https://www.mslinn.com/blog/2020/10/03/jekyll-plugins.html#jekyll_pre).
 
 
 ## Installation

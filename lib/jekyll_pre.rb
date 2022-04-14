@@ -37,18 +37,19 @@ class PreTagBlock < Liquid::Block
     "#{@@prefix}'##{pre_id}'#{@@suffix}"
   end
 
-  def self.make_pre(make_copy_button, number_lines, label, content)
+  def self.make_pre(make_copy_button, number_lines, label, dark, content) # rubocop:disable Metrics/ParameterLists
+    dark_label = " darkLabel" if dark
     label = if label.to_s.empty?
               ""
             elsif label.to_s.downcase.strip == "shell"
-              "<div class='codeLabel unselectable' data-lt-active='false'>Shell</div>"
+              "<div class='codeLabel unselectable#{dark_label}' data-lt-active='false'>Shell</div>"
             else
-              "<div class='codeLabel unselectable' data-lt-active='false'>#{label}</div>"
+              "<div class='codeLabel unselectable#{dark_label}' data-lt-active='false'>#{label}</div>"
             end
     pre_id = "id#{SecureRandom.hex(6)}"
     copy_button = make_copy_button ? PreTagBlock.make_copy_button(pre_id) : ""
     content = PreTagBlock.number_content(content) if number_lines
-    "#{label}<pre data-lt-active='false' class='maxOneScreenHigh copyContainer' id='#{pre_id}'>#{copy_button}#{content.strip}</pre>"
+    "#{label}<pre data-lt-active='false' class='maxOneScreenHigh copyContainer#{dark}' id='#{pre_id}'>#{copy_button}#{content.strip}</pre>"
   end
 
   def self.number_content(content)
@@ -82,6 +83,9 @@ class PreTagBlock < Liquid::Block
     @number_lines = remaining_text.include? "number"
     remaining_text = remaining_text.sub("number", "").strip
 
+    @dark = " dark" if remaining_text.include? "dark"
+    remaining_text = remaining_text.sub("dark", "").strip
+
     @label = remaining_text
 
     @logger.debug { "@make_copy_button = '#{@make_copy_button}'; argument_string = '#{argument_string}'; remaining_text = '#{remaining_text}'" }
@@ -92,7 +96,7 @@ class PreTagBlock < Liquid::Block
   def render(context)
     content = super
     @logger.debug { "@make_copy_button = '#{@make_copy_button}'; @label = '#{@label}'" }
-    PreTagBlock.make_pre(@make_copy_button, @number_lines, @label, content)
+    PreTagBlock.make_pre(@make_copy_button, @number_lines, @label, @dark, content)
   end
 end
 

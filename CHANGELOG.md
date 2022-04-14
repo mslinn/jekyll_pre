@@ -1,3 +1,6 @@
+## 1.1.3
+  * Documented the `data-lt-active="false"` attribute.
+
 ## 1.1.2 / 2022-04-05
   * Updated to `jekyll_plugin_logger` v2.1.0
 

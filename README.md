@@ -10,6 +10,7 @@ This Jekyll plugin provides 2 new Liquid tags that work together:
     Contents of pre tag
     {% endpre %}
     ```
+    The generated &lt;pre>&lt;/pre> tag has an `data-lt-active="false"` attribute, so [LanguageTool](https://forum.languagetool.org/t/avoid-spell-check-on-certain-html-inputs-manually/3944) does not check the spelling or grammar of the contents.
   * A `noselect` tag that can renders HTML content passed to it unselectable.
     ```
     {% pre [copyButton] %}

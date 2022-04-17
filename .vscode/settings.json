@@ -1,3 +1,5 @@
 {
-  "ruby.rubocop.configFilePath": ".rubocop.yml"
+  "ruby.rubocop.configFilePath": ".rubocop.yml",
+  "ruby.rubocop.useBundler": true,
+  "ruby.rubocop.executePath": "./exe/"
 }

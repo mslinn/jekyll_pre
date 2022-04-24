@@ -2,7 +2,10 @@
 
 require "liquid"
 require "jekyll_plugin_logger"
+require 'key_value_parser'
+require "shellwords"
 require_relative "jekyll_pre/version"
+require_relative "jekyll_tag_helper"
 
 module JekyllPluginPreName
   PLUGIN_NAME = "jekyll_pre"
@@ -52,7 +55,7 @@ class PreTagBlock < Liquid::Block
             end
     pre_id = "id#{SecureRandom.hex(6)}"
     copy_button = make_copy_button ? PreTagBlock.make_copy_button(pre_id) : ""
-    content = PreTagBlock.highlight(content, highlight_pattern)
+    content = PreTagBlock.highlight(content, highlight_pattern) if highlight_pattern
     content = PreTagBlock.number_content(content) if number_lines
     "#{label}<pre data-lt-active='false' class='maxOneScreenHigh copyContainer#{dark}' id='#{pre_id}'>#{copy_button}#{content.strip}</pre>"
   end
@@ -72,37 +75,38 @@ class PreTagBlock < Liquid::Block
   end
 
   # @param _tag_name [String] is the name of the tag, which we already know.
-  # @param argument_string [String] the arguments from the web page.
+  # @param markup [String] the arguments from the web page.
   # @param _tokens [Liquid::ParseContext] tokenized command line
+  #        By default it has two keys: :locale and :line_numbers, the first is a Liquid::I18n object, and the second,
+  #        a boolean parameter that determines if error messages should display the line number the error occurred.
+  #        This argument is used mostly to display localized error messages on Liquid built-in Tags and Filters.
+  #        See https://github.com/Shopify/liquid/wiki/Liquid-for-Programmers#create-your-own-tags
   # @return [void]
-  def initialize(_tag_name, argument_string, _tokens)
+  def initialize(_tag_name, markup, _tokens)
     super
-    argument_string = "" if argument_string.nil?
-    argument_string.strip!
+    markup = "" if markup.nil?
+    markup.strip!
 
     @logger = PluginMetaLogger.instance.new_logger(self, PluginMetaLogger.instance.config)
-
-    @highlight = argument_string.include? "highlight"
-    remaining_text = argument_string.sub("highlight", "").strip
-
-    @make_copy_button = remaining_text.include? "copyButton"
-    remaining_text = argument_string.sub("copyButton", "").strip
-
-    @number_lines = remaining_text.include? "number"
-    remaining_text = remaining_text.sub("number", "").strip
-
-    @dark = " dark" if remaining_text.include? "dark"
-    remaining_text = remaining_text.sub("dark", "").strip
-
-    @label = remaining_text
-
-    @logger.debug { "@make_copy_button = '#{@make_copy_button}'; argument_string = '#{argument_string}'; remaining_text = '#{remaining_text}'" }
+    @helper = JekyllTagHelper.new(tag_name, markup, @logger)
   end
 
   # Method prescribed by the Jekyll plugin lifecycle.
+  # @param liquid_context [Liquid::Context]
   # @return [String]
-  def render(context)
+  def render(liquid_context)
     content = super
+    @helper.liquid_context = liquid_context
+
+    @highlight =  @helper.parameter_specified? "highlight"
+    @make_copy_button = @helper.parameter_specified? "copyButton"
+    @number_lines = @helper.parameter_specified? "number"
+    @dark = " dark" if @helper.parameter_specified? "dark"
+    @label = @helper.parameter_specified? "label"
+
+    # If a label was specified, use it, otherwise concatenate any dangling parameters and use that as the label
+    @label ||= @helper.params.join(" ")
+
     @logger.debug { "@make_copy_button = '#{@make_copy_button}'; @label = '#{@label}'" }
     PreTagBlock.make_pre(@make_copy_button, @number_lines, @label, @dark, @highlight, content)
   end
@@ -112,20 +116,20 @@ end
 # Also, space before the closing percent is signficant %}"""
 class UnselectableTag < Liquid::Tag
   # @param _tag_name [String] is the name of the tag, which we already know.
-  # @param argument_string [String] the arguments from the web page.
+  # @param markup [String] the arguments from the web page.
   # @param _tokens [Liquid::ParseContext] tokenized command line
   # @return [void]
-  def initialize(_tag_name, argument_string, _tokens)
+  def initialize(_tag_name, markup, _tokens)
     super
     @logger = PluginMetaLogger.instance.new_logger(self)
 
-    @argument_string = argument_string
-    @argument_string = "$ " if @argument_string.nil? || @argument_string.empty?
-    @logger.debug { "UnselectableTag: argument_string= '#{@argument_string}'" }
+    @markup = markup
+    @markup = "$ " if @markup.nil? || @markup.empty?
+    @logger.debug { "UnselectableTag: markup= '#{@markup}'" }
   end
 
   def render(_)
-    "<span class='unselectable'>#{@argument_string}</span>"
+    "<span class='unselectable'>#{@markup}</span>"
   end
 end
 

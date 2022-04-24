@@ -1,5 +1,6 @@
 ## 1.1.4
   * Added `highlight` regex option
+  * Now using `lib/jekyll_tag_helper.rb` to parse markup
 
 ## 1.1.3
   * Documented the `data-lt-active="false"` attribute.

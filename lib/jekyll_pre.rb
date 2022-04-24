@@ -33,11 +33,15 @@ class PreTagBlock < Liquid::Block
   @@suffix = " title='Copy to clipboard'><img src='/assets/images/clippy.svg' " \
              "alt='Copy to clipboard' style='width: 13px'></button>"
 
+  def self.highlight(content, pattern)
+    content.gsub(Regexp::new(pattern), "<span class='bg_yellow'>\\0</span>")
+  end
+
   def self.make_copy_button(pre_id)
     "#{@@prefix}'##{pre_id}'#{@@suffix}"
   end
 
-  def self.make_pre(make_copy_button, number_lines, label, dark, content) # rubocop:disable Metrics/ParameterLists
+  def self.make_pre(make_copy_button, number_lines, label, dark, highlight_pattern, content) # rubocop:disable Metrics/ParameterLists
     dark_label = " darkLabel" if dark
     label = if label.to_s.empty?
               ""
@@ -48,6 +52,7 @@ class PreTagBlock < Liquid::Block
             end
     pre_id = "id#{SecureRandom.hex(6)}"
     copy_button = make_copy_button ? PreTagBlock.make_copy_button(pre_id) : ""
+    content = PreTagBlock.highlight(content, highlight_pattern)
     content = PreTagBlock.number_content(content) if number_lines
     "#{label}<pre data-lt-active='false' class='maxOneScreenHigh copyContainer#{dark}' id='#{pre_id}'>#{copy_button}#{content.strip}</pre>"
   end
@@ -77,7 +82,10 @@ class PreTagBlock < Liquid::Block
 
     @logger = PluginMetaLogger.instance.new_logger(self, PluginMetaLogger.instance.config)
 
-    @make_copy_button = argument_string.include? "copyButton"
+    @highlight = argument_string.include? "highlight"
+    remaining_text = argument_string.sub("highlight", "").strip
+
+    @make_copy_button = remaining_text.include? "copyButton"
     remaining_text = argument_string.sub("copyButton", "").strip
 
     @number_lines = remaining_text.include? "number"
@@ -96,7 +104,7 @@ class PreTagBlock < Liquid::Block
   def render(context)
     content = super
     @logger.debug { "@make_copy_button = '#{@make_copy_button}'; @label = '#{@label}'" }
-    PreTagBlock.make_pre(@make_copy_button, @number_lines, @label, @dark, content)
+    PreTagBlock.make_pre(@make_copy_button, @number_lines, @label, @dark, @highlight, content)
   end
 end
 

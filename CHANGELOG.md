@@ -1,3 +1,6 @@
+## 1.1.4
+  * Added `highlight` regex option
+
 ## 1.1.3
   * Documented the `data-lt-active="false"` attribute.
   * Added the `dark` option, and [provided CSS](https://www.mslinn.com/blog/2020/10/03/jekyll-plugins.html#pre_css).

@@ -1,23 +1,25 @@
 # frozen_string_literal: true
 
-require "shellwords"
+require 'shellwords'
 require 'key_value_parser'
 
+# Parses arguments and options
 class JekyllTagHelper
   attr_reader :argv, :liquid_context, :logger, :params, :tag_name
 
   def self.escape_html(string)
-    string.gsub("&", "&amp;")
-          .gsub("{", "&#123;")
-          .gsub("}", "&#125;")
-          .gsub("<", "&lt;")
+    string.gsub('&', '&amp;')
+          .gsub('{', '&#123;')
+          .gsub('}', '&#125;')
+          .gsub('<', '&lt;')
   end
 
   # Expand a environment variable reference
-  def self.expand_env(str, die_if_undefined=false)
+  def self.expand_env(str, die_if_undefined: false)
     str.gsub(/\$([a-zA-Z_][a-zA-Z0-9_]*)|\${\g<1>}|%\g<1>%/) do
       envar = Regexp.last_match(1)
       raise FlexibleError, "flexible_include error: #{envar} is undefined".red, [] if !ENV.key?(envar) && die_if_undefined # Suppress stack trace
+
       ENV[envar]
     end
   end
@@ -67,7 +69,7 @@ class JekyllTagHelper
     value = @liquid_context[name] # Finds variables named like 'include.my_variable', found in @liquid_context.scopes.first
     value ||= @page[name] if @page # Finds variables named like 'page.my_variable'
     value ||= dereference_include_variable(name)
-    value ||= ""
+    value ||= ''
     value
   end
 
@@ -79,9 +81,9 @@ class JekyllTagHelper
 
   def lookup_variable(symbol)
     string = symbol.to_s
-    return string unless string.start_with?("{{") && string.end_with?("}}")
+    return string unless string.start_with?('{{') && string.end_with?('}}')
 
-    dereference_variable(string.delete_prefix("{{").delete_suffix("}}"))
+    dereference_variable(string.delete_prefix('{{').delete_suffix('}}'))
   end
 
   def page

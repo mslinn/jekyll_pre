@@ -1,3 +1,7 @@
+## 1.1.5
+  * Added `class` and `style` options to allow for specifying additional CSS classes and inline CSS
+  * Added `clear` option to ensure no images overlap the pre output
+
 ## 1.1.4
   * Added `highlight` regex option
   * Now using `lib/jekyll_tag_helper.rb` to parse markup

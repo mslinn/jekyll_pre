@@ -1,14 +1,12 @@
-# frozen_string_literal: true
-
-require "fileutils"
-require "jekyll"
-require "key_value_parser"
-require "shellwords"
-require_relative "../lib/jekyll_pre"
+require 'fileutils'
+require 'jekyll'
+require 'key_value_parser'
+require 'shellwords'
+require_relative '../lib/jekyll_pre'
 
 RSpec.describe(PreTagBlock) do
-  it "parses arguments" do
-    argv = Shellwords.split "number copyButton shell"
+  it 'parses arguments' do
+    argv = Shellwords.split 'number copyButton shell'
     options = KeyValueParser.new.parse(argv)
     # puts options.map { |k, v| "#{k} = #{v}" }.join("\n")
 
@@ -17,7 +15,7 @@ RSpec.describe(PreTagBlock) do
     expect(options[:shell]).to be true
   end
 
-  it "numbers content lines" do
+  it 'numbers content lines' do
     content = <<~END_CONTENT
       Line 1
         Line 2
@@ -30,7 +28,7 @@ RSpec.describe(PreTagBlock) do
         Line 9
       Line 10
     END_CONTENT
-    numbered_content = PreTagBlock.number_content(content)
+    numbered_content = described_class.number_content(content)
     expected_content = <<~END_CONTENT
       <span class='unselectable numbered_line'>  1: </span>Line 1
       <span class='unselectable numbered_line'>  2: </span>  Line 2
@@ -46,7 +44,7 @@ RSpec.describe(PreTagBlock) do
     expect(numbered_content).to eq(expected_content)
   end
 
-  it "highlights regex patterns" do
+  it 'highlights regex patterns' do
     content = <<~END_CONTENT
       Line 1
         Line 2
@@ -59,7 +57,7 @@ RSpec.describe(PreTagBlock) do
         Line 9
       Line 10
     END_CONTENT
-    highlighted = PreTagBlock.highlight(content, ".*2").split("\n")[1]
+    highlighted = described_class.highlight(content, '.*2').split("\n")[1]
     expect(highlighted).to eq("<span class='bg_yellow'>  Line 2</span>")
   end
 end

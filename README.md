@@ -6,10 +6,20 @@ This Jekyll plugin provides 2 new Liquid tags that work together:
 
   * A `pre` block tag that can optionally display a copy button.
     ```
-    {% pre [copyButton] [shell] [headline words] %}
+    {% pre [Options] [headline words] %}
     Contents of pre tag
     {% endpre %}
     ```
+    `Options` are:
+     - `clear` &ndash; Line break after floating HTML elements
+     - `class="class names"` &ndash; Apply CSS styles
+     - `copyButton` &ndash; Generate a copy button
+     - `dark` &ndash; Dark mode
+     - `label='This is a label'` &ndash; Apply text above pre tag
+     - `number` &ndash; Number the lines
+     - `shell` &ndash; Equivalent to `label='Shell'`
+     - `style` &ndash; Apply CSS styles
+
     The generated &lt;pre>&lt;/pre> tag has an `data-lt-active="false"` attribute, so [LanguageTool](https://forum.languagetool.org/t/avoid-spell-check-on-certain-html-inputs-manually/3944) does not check the spelling or grammar of the contents.
   * A `noselect` tag that can renders HTML content passed to it unselectable.
     ```
@@ -39,8 +49,9 @@ Below are the CSS declarations that I defined pertaining to the pre and noselect
 }
 ```
 
+
 ## Additional Information
-More information is available on [my web site](https://www.mslinn.com/blog/2020/10/03/jekyll-plugins.html#jekyll_pre).
+More information is available on [my website](https://www.mslinn.com/blog/2020/10/03/jekyll-plugins.html#jekyll_pre).
 
 
 ## Installation
@@ -56,10 +67,6 @@ end
 And then execute:
 
     $ bundle install
-
-Or install it yourself as:
-
-    $ gem install jekyll_pre
 
 
 ## Usage
@@ -173,6 +180,20 @@ the `from` and `to` tags from my [`from_to_until`](https://github.com/mslinn/jek
 After checking out the repo, run `bin/setup` to install dependencies.
 
 You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+
+
+## Test
+A test website is provided in the `demo` directory.
+ 1. Set breakpoints.
+
+ 2. Initiate a debug session from the command line:
+    ```shell
+    $ bin/attach demo
+    ```
+
+  3. Once the `Fast Debugger` signon appears, launch the Visual Studio Code launch configuration called `Attach rdebug-ide`.
+
+  4. View the generated website at [`http://localhost:4444`](http://localhost:4444)
 
 
 ### Build and Install Locally

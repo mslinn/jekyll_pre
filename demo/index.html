@@ -1,0 +1,131 @@
+---
+description: Jekyll pre plugin demo
+layout: default
+title: Welcome
+---
+{% pre copyButton dark Dark Mode Example 1 %}
+{% noselect %}Using copyButton and dark parameters, but not using a label parameter.
+{% noselect How now brown cow %}
+{% endpre %}
+
+
+<hr>
+{% pre copyButton dark label='Dark Mode Example 2' %}
+{% noselect >>> %}Using copyButton, dark and label parameters
+{% noselect How now brown cow %}
+{% endpre %}
+
+
+<hr>
+{% pre %}This example does not generate a copy button and does not demonstrate noselect.{% endpre %}
+
+
+<hr>
+{% pre copyButton %}
+This example generates a copy button and does not demonstrate noselect.
+{% endpre %}
+
+
+<hr>
+{% pre copyButton shell %}
+This example demonstrates the copyButton and shell parameters.
+It does not demonstrate noselect.
+{% endpre %}
+
+
+<hr>
+<img src="/assets/images/jekyll.webp" style="float: right; width: 100px; height: auto;">
+{% pre clear copyButton label='Clear example' %}
+{% noselect %}Using clear, copyButton and label parameters
+{% endpre %}
+
+
+<hr>
+<p>
+  The following example generates a copy button and demonstrates the default usage of <code>noselect</code>,
+  which renders an unselectable dollar sign followed by a space.
+</p>
+
+{% pre copyButton %}
+{% noselect %}Contents of pre tag
+{% endpre %}
+
+
+<hr>
+<p>
+  This example generates a copy button and demonstrates the <code>noselect</code> tag being used twice:
+  the first time to render an unselectable custom prompt,
+  and the second time to render unselectable output.
+</p>
+
+{% pre copyButton %}
+{% noselect >>> %}Contents of pre tag
+{% noselect How now brown cow %}
+{% endpre %}
+
+
+<hr>
+{% pre copyButton number label="Numbered lines" %}
+Line 1
+  Line 2
+    Line 3
+      Line 4
+    Line 5
+  Line 6
+Line 7
+{% endpre %}
+
+
+<hr>
+<p>
+  A regular expression can be passed to the highlight option.
+  This causes text that matches the regex pattern to be wrapped within a
+  <code>&lt;span class="bg_color"&gt;&lt;/span&gt;</code> tag.
+</p>
+<p>
+  This example demonstrates highlighting text that matches a regular expression.
+  Regular expressions match against lines, which are delimited via newlines (<code>\n</code>).
+</p>
+
+{% pre copyButton highlight="Line 2" %}
+Line 1
+  Line 2
+    Line 3
+      Line 4
+    Line 5
+  Line 6
+Line 7
+{% endpre %}
+{% pre copyButton number highlight="Line 2" label="Numbered lines with highlight" %}
+Line 1
+  Line 2
+    Line 3
+      Line 4
+    Line 5
+  Line 6
+Line 7
+{% endpre %}
+
+
+<hr>
+<p>
+  Regular expressions match against lines, which are delimited view newlines (<code>\n</code>).
+  Thus, to match an entire line that contains a phrase, specify the regex as <code>.*phrase.*</code>.
+  The following matches 3 possible phrases (2, 4 or 6), then selects the entire line if matched.
+</p>
+
+{% pre copyButton highlight=".*(2|4|6).*" %}
+Line 1
+  Line 2
+    Line 3
+      Line 4
+    Line 5
+  Line 6
+Line 7
+{% endpre %}
+
+
+<script src="/assets/js/clipboard.min.js"></script>
+<script>
+  new ClipboardJS('.copyBtn');
+</script>

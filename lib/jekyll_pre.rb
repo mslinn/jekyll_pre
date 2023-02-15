@@ -87,7 +87,8 @@ end
 # Also, space before the closing percent is signficant %}"""
 class UnselectableTag < JekyllSupport::JekyllTag
   def render_impl
-    text = @helper.argv.join(' ').strip
+    text = @argument_string
+    text = '$ ' if text.nil? || text.empty?
     "<span class='unselectable'>#{text}</span>"
   end
 end

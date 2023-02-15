@@ -1,6 +1,8 @@
+## 1.1.7
+  * Fixed `noselect` tag content handling.
+
 ## 1.1.6
   * Added `jekyll_plugin_support` as a dependency.
-
 
 ## 1.1.5
   * Added `class` and `style` options to allow for specifying additional CSS classes and inline CSS

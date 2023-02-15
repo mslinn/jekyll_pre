@@ -53,6 +53,21 @@ It does not demonstrate noselect.
 
 <hr>
 <p>
+  This example generates a copy button and demonstrates multi-line <code>noselect</code> contents being used twice:
+  the first time to render an unselectable custom prompt,
+  and the second time to render unselectable output.
+</p>
+
+{% pre copyButton %}
+{% noselect %}Preceeded by a dollar sign
+{% noselect How now brown cow
+This is line 2
+This is line 3 of noselect %}
+{% endpre %}
+
+
+<hr>
+<p>
   This example generates a copy button and demonstrates the <code>noselect</code> tag being used twice:
   the first time to render an unselectable custom prompt,
   and the second time to render unselectable output.

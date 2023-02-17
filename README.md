@@ -11,20 +11,27 @@ This Jekyll plugin provides 2 new Liquid tags that work together:
     {% endpre %}
     ```
     `Options` are:
+     - `class="class1 class2"` &ndash; Apply CSS classes
      - `clear` &ndash; Line break after floating HTML elements
-     - `class="class names"` &ndash; Apply CSS styles
      - `copyButton` &ndash; Generate a copy button
      - `dark` &ndash; Dark mode
-     - `label='This is a label'` &ndash; Apply text above pre tag
+     - `label='This is a label'` &ndash; Apply text above `pre` tag.
+        The `label` parameter value can also be specified in free text.
+        For example, the following produce the same results:
+
+        - {% pre label="This is a label" %}<br>Contents of pre tag<br>{% endpre %}
+
+        - {% pre This is a label %}<br>Contents of pre tag<br>{% endpre %}
      - `number` &ndash; Number the lines
      - `shell` &ndash; Equivalent to `label='Shell'`
      - `style` &ndash; Apply CSS styles
 
     The generated &lt;pre>&lt;/pre> tag has an `data-lt-active="false"` attribute, so [LanguageTool](https://forum.languagetool.org/t/avoid-spell-check-on-certain-html-inputs-manually/3944) does not check the spelling or grammar of the contents.
-  * A `noselect` tag that can renders HTML content passed to it unselectable.
+  * A `noselect` tag that can renders HTML content passed to it unselectable,
+    and generates a <code>$</code> prompt if no content is provided.
     ```
-    {% pre [copyButton] %}
-    {% noselect [text string, defaults to $]%}Contents of pre tag
+    {% pre %}
+    {% noselect [optional text string, defaults to $]%}Contents of pre tag
     {% endpre %}
     ```
 

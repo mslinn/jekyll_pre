@@ -32,5 +32,5 @@ Gem::Specification.new do |spec|
   spec.version = JekyllPreVersion::VERSION
 
   spec.add_dependency 'jekyll', '>= 3.5.0'
-  spec.add_dependency 'jekyll_plugin_support', '~> 0.4.0'
+  spec.add_dependency 'jekyll_plugin_support', '~> 0.5.0'
 end

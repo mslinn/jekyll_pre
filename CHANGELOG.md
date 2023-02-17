@@ -1,3 +1,9 @@
+## 1.2.1
+  * Updated to `jekyll_plugin_support` v0.5.1 so the `noselect` tag is more efficient.
+
+## 1.2.0
+  * Updated to `jekyll_plugin_support` v0.5.0.
+
 ## 1.1.7
   * Fixed `noselect` tag content handling.
 

@@ -85,7 +85,7 @@ end
 
 # """\\{% noselect %} or \\{% noselect this all gets copied.
 # Also, space before the closing percent is signficant %}"""
-class UnselectableTag < JekyllSupport::JekyllTag
+class UnselectableTag < JekyllSupport::JekyllTagNoArgParsing
   def render_impl
     text = @argument_string
     text = '$ ' if text.nil? || text.empty?

@@ -1,6 +1,9 @@
 require:
- - rubocop-rspec
- - rubocop-rake
+  # - rubocop-jekyll
+  - rubocop-md
+  - rubocop-performance
+  - rubocop-rake
+  - rubocop-rspec
 
 AllCops:
   Exclude:

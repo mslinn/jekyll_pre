@@ -3,6 +3,17 @@ description: Jekyll pre plugin demo
 layout: default
 title: Welcome
 ---
+{% pre copyButton label="exec ls" %}
+{% noselect %}{% exec ls %}
+{% endpre %}
+
+
+{% pre copyButton label="Error" %}
+{% noselect %}{% exec die_if_nonzero="false" ls /asdf %}
+{% endpre %}
+
+
+<h2 id="dark">Dark Mode</h2>
 {% pre copyButton dark Dark Mode Example 1 %}
 {% noselect %}Using copyButton and dark parameters, but not using a label parameter.
 {% noselect How now brown cow %}
@@ -16,6 +27,7 @@ title: Welcome
 {% endpre %}
 
 
+<h2 id="bits">Bit By Bit</h2>
 <hr>
 {% pre %}This example does not generate a copy button and does not demonstrate noselect.{% endpre %}
 

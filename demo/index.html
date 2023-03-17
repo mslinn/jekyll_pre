@@ -3,13 +3,13 @@ description: Jekyll pre plugin demo
 layout: default
 title: Welcome
 ---
-{% pre copyButton label="exec ls" %}
-{% noselect %}{% exec ls %}
+{% pre copyButton label="Error" %}
+{% noselect %}{% exec die_if_nonzero='false' ls /asdf %}
 {% endpre %}
 
 
-{% pre copyButton label="Error" %}
-{% noselect %}{% exec die_if_nonzero="false" ls /asdf %}
+{% pre copyButton label="exec ls" %}
+{% noselect %}{% exec ls %}
 {% endpre %}
 
 

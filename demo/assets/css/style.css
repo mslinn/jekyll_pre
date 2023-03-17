@@ -107,6 +107,18 @@ header, #main-content {
   padding-right: 0.5em;
 }
 
+.bg_yellow {
+  background-color: yellow;
+  padding: 2px;
+}
+
+.clear {
+  clear: both;
+}
+
+
+/* Start of pre tag css */
+
 pre.dark {
   color: #eee;
   background-color: #222;
@@ -115,11 +127,6 @@ pre.dark {
 pre.dark .unselectable,
 pre.dark .unselectable > code {
   color: rgb(155, 150, 150);
-}
-
-.bg_yellow {
-  background-color: yellow;
-  padding: 2px;
 }
 
 .codeLabel {
@@ -131,10 +138,6 @@ pre.dark .unselectable > code {
   padding-right: 10px;
   padding-top: 2px;
   font-stretch: semi-condensed;
-}
-
-.clear {
-  clear: both;
 }
 
 .darkLabel {
@@ -213,6 +216,14 @@ ol li .codeLabel {
   white-space: pre-wrap;
 }
 
+/* Added for v1.2.2 */
+.error {
+  color: white;
+  background-color: darkred;
+  padding: 2px;
+}
+
+/* End of pre tag css */
 
 
 @media only screen and (min-width: 768px) and (max-width: 959px) {

@@ -7,14 +7,17 @@ module ExecTag
     def render_impl
       parse_args
 
-      command = @argument_string
+      command = @helper.remaining_markup
       response = `#{command}`
-      if @die_if_nonzero && !$CHILD_STATUS.success?
+      if $CHILD_STATUS.success?
+        response = compress response
+      else
         msg = "Error: executing '#{command}' on line #{@line_number} (after front matter) of #{@page['path']} returned error code #{$CHILD_STATUS.exitstatus}"
-        raise PreError, msg.red, []
-      end
+        raise PreError, msg.red, [] if @die_if_nonzero
 
-      response = compress response
+        @logger.error { msg }
+        response = "<span class='error'>Error: error code #{$CHILD_STATUS.exitstatus}</span>"
+      end
 
       <<~END_OUTPUT
         #{Rack::Utils.escape_html(command)}
@@ -40,7 +43,7 @@ module ExecTag
     def parse_args
       @no_escape      = @helper.parameter_specified? 'no_escape'
       @no_strip       = @helper.parameter_specified? 'no_strip'
-      @die_if_nonzero = @helper.parameter_specified?('die_if_nonzero') | true # Implies die_if_error
+      @die_if_nonzero = @helper.parameter_specified?('die_if_nonzero') # Implies die_if_error
       @die_if_error   = @helper.parameter_specified?('die_if_error') | @die_if_nonzero
     end
 

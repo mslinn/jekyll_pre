@@ -2,7 +2,7 @@ Jekyll_pre
 [![Gem Version](https://badge.fury.io/rb/jekyll_pre.svg)](https://badge.fury.io/rb/jekyll_pre)
 ===========
 
-This Jekyll plugin provides 2 new Liquid tags that work together:
+This Jekyll plugin provides 3 new Liquid tags that work together:
 
   * A `pre` block tag that can optionally display a copy button.
     ```
@@ -27,6 +27,7 @@ This Jekyll plugin provides 2 new Liquid tags that work together:
      - `style` &ndash; Apply CSS styles
 
     The generated &lt;pre>&lt;/pre> tag has an `data-lt-active="false"` attribute, so [LanguageTool](https://forum.languagetool.org/t/avoid-spell-check-on-certain-html-inputs-manually/3944) does not check the spelling or grammar of the contents.
+
   * A `noselect` tag that can renders HTML content passed to it unselectable,
     and generates a <code>$</code> prompt if no content is provided.
     ```
@@ -35,6 +36,8 @@ This Jekyll plugin provides 2 new Liquid tags that work together:
     {% endpre %}
     ```
 
+  * An `exec` tag that executes shell commands and incorporates the command and its output into the content of the `pre` tag.
+    Output data is escaped, whitespace is condensed, and wrapped in the same `unselectable` class as does `unselectable`.
 ## CSS
 Below are the CSS declarations that I defined pertaining to the pre and noselect tags that produced the above images:
 ```css

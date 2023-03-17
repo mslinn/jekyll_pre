@@ -1,3 +1,6 @@
+## 1.2.2
+  * Added `exec` tag.
+
 ## 1.2.1
   * Updated to `jekyll_plugin_support` v0.5.1 so the `noselect` tag is more efficient.
 

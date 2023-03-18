@@ -1,4 +1,5 @@
 require 'jekyll_plugin_support'
+require_relative 'jekyll_pre/version'
 
 module NoSelectTag
   # """\\{% noselect %} or \\{% noselect this all gets copied.

@@ -1,4 +1,5 @@
 require 'jekyll_plugin_support'
+require_relative 'jekyll_pre/version'
 
 module ExecTag
   class ExecTag < JekyllSupport::JekyllTag

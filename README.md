@@ -38,7 +38,8 @@ This Jekyll plugin provides 3 new Liquid tags that work together:
     ```
 
   * An `exec` tag that executes shell commands and incorporates the command and its output into the content of the `pre` tag.
-    Output data is escaped, whitespace is condensed, and wrapped in the same `unselectable` class as does `unselectable`.
+    Environment variables are evaluated,
+    output data is escaped, whitespace is condensed, and wrapped in the same `unselectable` class as does `unselectable`.
     ```
     {% exec [Options] [shell command] %}
     ```
@@ -225,6 +226,15 @@ The following changes to the home directory (`$HOME`), then executes `pwd` and d
 ```
 {% pre clear copyButton label='Exec without error' %}
 {% noselect %}{% exec cd="$HOME" die_if_nonzero=false pwd %}
+{% endpre %}
+```
+
+### Example 10
+The following executes `echo $USER` and displays the output.
+
+```
+{% pre clear copyButton label='Exec display &dollar;USER' %}
+{% noselect %}{% exec die_if_nonzero=false echo $USER %}
 {% endpre %}
 ```
 

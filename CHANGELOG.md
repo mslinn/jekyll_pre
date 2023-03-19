@@ -1,3 +1,6 @@
+## 1.2.4
+  * The `exec` tag now evaluates environment variables in the command before execution.
+
 ## 1.2.3
   * Added `cd` option to `exec` tag.
 

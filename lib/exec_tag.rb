@@ -7,7 +7,8 @@ module ExecTag
 
     def render_impl
       parse_args
-      command = @helper.remaining_markup
+      @original_command = @helper.remaining_markup
+      command = JekyllPluginHelper.expand_env(@original_command)
       response = run_command(command)
       response = if @child_status.success?
                    compress(response)
@@ -16,13 +17,13 @@ module ExecTag
                  end
 
       <<~END_OUTPUT
-        #{Rack::Utils.escape_html(command)}
+        #{Rack::Utils.escape_html(@original_command)}
         <span class='unselectable'>#{response}</span>
       END_OUTPUT
     rescue PreError => e
       raise PreError, e.message, []
     rescue StandardError => e
-      msg = remove_html_tags(e.message) + " from executing '#{command}' on line #{@line_number} (after front matter) of #{@page['path']}"
+      msg = remove_html_tags(e.message) + " from executing '#{@original_command}' on line #{@line_number} (after front matter) of #{@page['path']}"
       raise PreError, msg.red, [] if die_if_error
     end
 
@@ -44,6 +45,7 @@ module ExecTag
 
     def handle_error(command)
       msg0 = "Error: executing '#{command}'"
+      msg0 += " (expanded from #{@original_command})" if command != @original_command
       msg0 += " in directory '#{@cd}'" if @cd
       msg = <<~END_MSG
         #{msg0} on line #{@line_number} (after front matter) of #{@page['path']} returned error code #{@child_status.exitstatus}

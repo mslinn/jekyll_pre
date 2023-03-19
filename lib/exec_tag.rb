@@ -42,7 +42,7 @@ module ExecTag
       raise PreError, "#{@page['path']} - #{msg_no_html.red}", []
     end
 
-      def handle_error(command)
+    def handle_error(command)
       msg0 = "Error: executing '#{command}'"
       msg0 += " in directory '#{@cd}'" if @cd
       msg = <<~END_MSG
@@ -55,7 +55,9 @@ module ExecTag
     end
 
     def parse_args
-      @cd             = @helper.parameter_specified? 'cd'
+      @cd = @helper.parameter_specified? 'cd'
+      @cd = JekyllPluginHelper.expand_env(@cd) if @cd
+
       @no_escape      = @helper.parameter_specified? 'no_escape'
       @no_strip       = @helper.parameter_specified? 'no_strip'
       @die_if_nonzero = @helper.parameter_specified?('die_if_nonzero') # Implies die_if_error

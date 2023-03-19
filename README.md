@@ -219,6 +219,15 @@ The following executes `ls -alF /` and displays the output.
 {% endpre %}
 ```
 
+### Example 9
+The following changes to the home directory (`$HOME`), then executes `pwd` and displays the output.
+
+```
+{% pre clear copyButton label='Exec without error' %}
+{% noselect %}{% exec cd="$HOME" die_if_nonzero=false pwd %}
+{% endpre %}
+```
+
 
 ### Comprehensive Example
 The code I wrote to generate the above CSS was a good example of how the plugins work together with

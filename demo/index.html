@@ -3,11 +3,6 @@ description: Jekyll pre plugin demo
 layout: default
 title: Welcome
 ---
-{% pre copyButton label="Error" %}
-{% noselect %}{% exec die_if_nonzero='false' ls /asdf %}
-{% endpre %}
-
-
 {% pre copyButton label="exec pwd  # from website dir" %}
 {% noselect %}{% exec pwd %}
 {% endpre %}
@@ -18,6 +13,14 @@ title: Welcome
 
 {% pre copyButton label="exec echo &dollar;USER" %}
 {% noselect %}{% exec echo $USER %}
+{% endpre %}
+
+{% pre copyButton label="Error" %}
+{% noselect %}{% exec die_if_nonzero='false' ls /no_such_directory %}
+{% endpre %}
+
+{% pre copyButton label="exec bad_command &dollar;USER" %}
+{% noselect %}{% exec die_if_nonzero='false' bad_command $USER %}
 {% endpre %}
 
 

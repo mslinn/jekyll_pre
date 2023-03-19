@@ -5,9 +5,13 @@ module ExecTag
   class ExecTag < JekyllSupport::JekyllTag
     include JekyllPreVersion
 
+    def self.remove_html_tags(string)
+      string.gsub(/<[^>]*>/, '')
+    end
+
     def render_impl
       parse_args
-      @original_command = @helper.remaining_markup
+      @original_command = @helper.remaining_markup_original
       command = JekyllPluginHelper.expand_env(@original_command)
       response = run_command(command)
       response = if @child_status.success?
@@ -23,8 +27,8 @@ module ExecTag
     rescue PreError => e
       raise PreError, e.message, []
     rescue StandardError => e
-      msg = remove_html_tags(e.message) + " from executing '#{@original_command}' on line #{@line_number} (after front matter) of #{@page['path']}"
-      raise PreError, msg.red, [] if die_if_error
+      msg = self.class.remove_html_tags(e.message) + " from executing '#{@original_command}' on line #{@line_number} (after front matter) of #{@page['path']}"
+      raise PreError, msg.red, [] if @die_if_error
     end
 
     private
@@ -38,7 +42,7 @@ module ExecTag
     end
 
     def die(msg)
-      msg_no_html = remove_html_tags(msg)
+      msg_no_html = self.class.remove_html_tags(msg)
       @logger.error("#{@page['path']} - #{msg_no_html}")
       raise PreError, "#{@page['path']} - #{msg_no_html.red}", []
     end
@@ -80,12 +84,14 @@ module ExecTag
                end
       @child_status = $CHILD_STATUS
       result
+    rescue StandardError => e
+      msg = self.class.remove_html_tags(e.message) + " from executing '#{@original_command}' on line #{@line_number} (after front matter) of #{@page['path']}"
+      raise PreError, msg.red, [] if @die_if_error
+    ensure
+      @child_status = $CHILD_STATUS
+      result
     end
 
     JekyllPluginHelper.register(self, 'exec')
-  end
-
-  def remove_html_tags(string)
-    string.gsub(/<[^>]*>/, '')
   end
 end

@@ -1,3 +1,6 @@
+## 1.2.3
+  * Added `cd` option to `exec` tag.
+
 ## 1.2.2
   * Added `exec` tag.
   * Demarked CSS for the `exec`, `noselect`, and `pre` tags in `demo/assets/css/style.css`

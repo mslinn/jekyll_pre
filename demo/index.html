@@ -8,8 +8,12 @@ title: Welcome
 {% endpre %}
 
 
-{% pre copyButton label="exec ls" %}
-{% noselect %}{% exec ls %}
+{% pre copyButton label="exec pwd  # from website dir" %}
+{% noselect %}{% exec pwd %}
+{% endpre %}
+
+{% pre copyButton label="exec pwd  # from root directory" %}
+{% noselect %}{% exec cd="/" pwd %}
 {% endpre %}
 
 

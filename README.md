@@ -44,6 +44,7 @@ This Jekyll plugin provides 3 new Liquid tags that work together:
     ```
     `Options` are:
 
+     - `cd="relative/or/absolute/directory"` - Change to specified directory before executing shell command.
      - `no_escape` – Do not HTML escape the result of running the shell command.
      - `no_strip` – Do not remove leading and trailing whitespace from the result.
      - `die_if_nonzero` – Set `false` to treat non-zero return codes as non-fatal.

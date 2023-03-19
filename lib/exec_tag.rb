@@ -7,18 +7,13 @@ module ExecTag
 
     def render_impl
       parse_args
-
       command = @helper.remaining_markup
-      response = `#{command}`
-      if $CHILD_STATUS.success?
-        response = compress response
-      else
-        msg = "Error: executing '#{command}' on line #{@line_number} (after front matter) of #{@page['path']} returned error code #{$CHILD_STATUS.exitstatus}"
-        raise PreError, msg.red, [] if @die_if_nonzero
-
-        @logger.error { msg }
-        response = "<span class='error'>Error: error code #{$CHILD_STATUS.exitstatus}</span>"
-      end
+      response = run_command(command)
+      response = if @child_status.success?
+                   compress(response)
+                 else
+                   handle_error(command)
+                 end
 
       <<~END_OUTPUT
         #{Rack::Utils.escape_html(command)}
@@ -41,22 +36,49 @@ module ExecTag
       result
     end
 
+    def die(msg)
+      msg_no_html = remove_html_tags(msg)
+      @logger.error("#{@page['path']} - #{msg_no_html}")
+      raise PreError, "#{@page['path']} - #{msg_no_html.red}", []
+    end
+
+      def handle_error(command)
+      msg0 = "Error: executing '#{command}'"
+      msg0 += " in directory '#{@cd}'" if @cd
+      msg = <<~END_MSG
+        #{msg0} on line #{@line_number} (after front matter) of #{@page['path']} returned error code #{@child_status.exitstatus}
+      END_MSG
+      raise PreError, msg.red, [] if @die_if_nonzero
+
+      @logger.error { msg }
+      "<span class='error'>Error code #{@child_status.exitstatus}</span>"
+    end
+
     def parse_args
+      @cd             = @helper.parameter_specified? 'cd'
       @no_escape      = @helper.parameter_specified? 'no_escape'
       @no_strip       = @helper.parameter_specified? 'no_strip'
       @die_if_nonzero = @helper.parameter_specified?('die_if_nonzero') # Implies die_if_error
       @die_if_error   = @helper.parameter_specified?('die_if_error') | @die_if_nonzero
     end
 
+    # References @cd
+    # Defines @child_status
+    # @return result of running command
+    # @param command [String] Shell command to execute
+    def run_command(command)
+      result = if @cd
+                 Dir.chdir(@cd) do
+                   `#{command}`
+                 end
+               else
+                 `#{command}`
+               end
+      @child_status = $CHILD_STATUS
+      result
+    end
+
     JekyllPluginHelper.register(self, 'exec')
-  end
-
-  private
-
-  def die(msg)
-    msg_no_html = remove_html_tags(msg)
-    @logger.error("#{@page['path']} - #{msg_no_html}")
-    raise PreError, "#{@page['path']} - #{msg_no_html.red}", []
   end
 
   def remove_html_tags(string)

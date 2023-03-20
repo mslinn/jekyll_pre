@@ -13,6 +13,8 @@ module ExecTag
       parse_args
       @original_command = @helper.remaining_markup_original
       command = JekyllPluginHelper.expand_env(@original_command)
+      raise PreError, "Command is empty on on line #{@line_number} (after front matter) of #{@page['path']}", [] if command.strip.empty?
+
       response = run_command(command)
       response = if @child_status.success?
                    compress(response)

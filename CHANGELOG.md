@@ -1,3 +1,6 @@
+## 1.2.5
+  * Empty exec commands are detected and reported.
+
 ## 1.2.4
   * The `exec` tag now evaluates environment variables in the command before execution.
 

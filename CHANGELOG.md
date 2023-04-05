@@ -1,3 +1,6 @@
+## 1.3.0
+  * Updated to `jekyll_plugin_support` v0.6.0 for attribution support.
+
 ## 1.2.5
   * Empty exec commands are detected and reported.
 

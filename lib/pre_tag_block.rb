@@ -17,35 +17,6 @@ module PreTagBlock
       "#{@@prefix}'##{pre_id}'#{@@suffix}"
     end
 
-    def self.make_pre(make_copy_button, number_lines, label, dark, highlight_pattern, css_class, style, clear, content) # rubocop:disable Metrics/ParameterLists
-      pre_clear = label_clear = ''
-      if clear
-        if label.to_s.empty?
-          pre_clear = ' clear'
-        else
-          label_clear = ' clear'
-        end
-      end
-      css_class = css_class ? " #{css_class}" : ''
-      style = style ? " style='#{style}'" : ''
-      dark_label = ' darkLabel' if dark
-      label = if label.to_s.empty?
-                ''
-              elsif label.to_s.downcase.strip == 'shell'
-                "<div class='codeLabel unselectable#{dark_label}#{label_clear}' data-lt-active='false'>Shell</div>"
-              else
-                "<div class='codeLabel unselectable#{dark_label}#{label_clear}' data-lt-active='false'>#{label}</div>"
-              end
-      pre_id = "id#{SecureRandom.hex(6)}"
-      copy_button = make_copy_button ? PreTagBlock.make_copy_button(pre_id) : ''
-      content = PreTagBlock.highlight(content, highlight_pattern) if highlight_pattern
-      content = PreTagBlock.number_content(content) if number_lines
-
-      classes = "maxOneScreenHigh copyContainer#{dark}#{pre_clear}#{css_class}"
-      pre_content = "#{copy_button}#{content.strip}"
-      "#{label}<pre data-lt-active='false' class='#{classes}'#{style} id='#{pre_id}'>#{pre_content}</pre>"
-    end
-
     def self.number_content(content)
       lines = content.split("\n")
       digits = lines.length.to_s.length
@@ -62,6 +33,7 @@ module PreTagBlock
 
     def render_impl(text)
       text.strip!
+      @helper.gem_file __FILE__ # Enables plugin attribution
 
       @clear = @helper.parameter_specified? 'clear'
       @class = @helper.parameter_specified? 'class'
@@ -76,7 +48,43 @@ module PreTagBlock
       @label ||= @helper.argv.join(' ')
 
       @logger.debug { "@make_copy_button = '#{@make_copy_button}'; @label = '#{@label}'" }
-      self.class.make_pre(@make_copy_button, @number_lines, @label, @dark, @highlight, @class, @style, @clear, text)
+      make_pre(text)
+    end
+
+    private
+
+    def make_pre(content)
+      pre_clear = label_clear = ''
+      if @clear
+        if @label.to_s.empty?
+          pre_clear = ' clear'
+        else
+          label_clear = ' clear'
+        end
+      end
+      @class = @class ? " #{@class}" : ''
+      @style = @style ? " style='#{@style}'" : ''
+      dark_label = ' darkLabel' if @dark
+      @label = if @label.to_s.empty?
+                 ''
+               elsif @label.to_s.casecmp('shell').zero?
+                 "<div class='codeLabel unselectable#{dark_label}#{label_clear}' data-lt-active='false'>Shell</div>"
+               else
+                 "<div class='codeLabel unselectable#{dark_label}#{label_clear}' data-lt-active='false'>#{@label}</div>"
+               end
+      pre_id = "id#{SecureRandom.hex(6)}"
+      copy_button = @make_copy_button ? PreTagBlock.make_copy_button(pre_id) : ''
+      content = PreTagBlock.highlight(content, @highlight) if @highlight
+      content = PreTagBlock.number_content(content) if @number_lines
+
+      classes = "maxOneScreenHigh copyContainer#{@dark}#{pre_clear}#{@class}"
+      pre_content = "#{copy_button}#{content}"
+      attribution = @helper.attribute if @helper.attribution
+      <<~END_OUTPUT
+        #{@label}
+        <pre data-lt-active='false' class='#{classes}'#{@style} id='#{pre_id}'>#{pre_content}</pre>
+        #{attribution}
+      END_OUTPUT
     end
 
     JekyllPluginHelper.register(self, 'pre')

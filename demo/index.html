@@ -3,21 +3,50 @@ description: Jekyll pre plugin demo
 layout: default
 title: Welcome
 ---
-{% pre attribution copyButton label="exec pwd  # from website dir" %}
+<h2 id="wrappers">Wrapper Class and Wrapper Style</h2>
+{% pre copyButton label="wrapper_class test" wrapper_class="bg_yellow" %}
+Uses wrapper_class="bg_yellow"
+{% endpre %}
+
+<hr>
+
+{% pre copyButton label="wrapper style test" wrapper_style="max-width: 250px;" %}
+Uses wrapper_style="max-width: 250px;"
+{% endpre %}
+
+<hr>
+
+{% pre copyButton label="wrapper_class & _style test" wrapper_class="bg_yellow" wrapper_style="max-width: 250px;" %}
+Uses:
+  - wrapper_class="bg_yellow"
+  - wrapper_style="max-width: 250px;"
+{% endpre %}
+
+
+<h2 id="exec">Attribution</h2>
+{% pre attribution copyButton label="attribution test" %}
 {% noselect %}{% exec pwd %}
 {% endpre %}
 
+
+<h2 id="exec">Exec</h2>
 {% pre copyButton label="exec pwd  # from &dollar;HOME directory" %}
 {% noselect %}{% exec cd="$HOME" pwd %}
 {% endpre %}
+
+<hr>
 
 {% pre copyButton label="exec echo &dollar;USER" %}
 {% noselect %}{% exec echo $USER %}
 {% endpre %}
 
+<hr>
+
 {% pre copyButton label="Error" %}
 {% noselect %}{% exec die_if_nonzero='false' ls /no_such_directory %}
 {% endpre %}
+
+<hr>
 
 {% pre copyButton label="exec bad_command &dollar;USER" %}
 {% noselect %}{% exec die_if_nonzero='false' bad_command $USER %}
@@ -30,8 +59,8 @@ title: Welcome
 {% noselect How now brown cow %}
 {% endpre %}
 
-
 <hr>
+
 {% pre copyButton dark label='Dark Mode Example 2' %}
 {% noselect >>> %}Using copyButton, dark and label parameters
 {% noselect How now brown cow %}
@@ -39,31 +68,30 @@ title: Welcome
 
 
 <h2 id="bits">Bit By Bit</h2>
-<hr>
 {% pre %}This example does not generate a copy button and does not demonstrate noselect.{% endpre %}
 
-
 <hr>
+
 {% pre copyButton %}
 This example generates a copy button and does not demonstrate noselect.
 {% endpre %}
 
-
 <hr>
+
 {% pre copyButton shell %}
 This example demonstrates the copyButton and shell parameters.
 It does not demonstrate noselect.
 {% endpre %}
 
-
 <hr>
+
 <img src="/assets/images/jekyll.webp" style="float: right; width: 100px; height: auto;">
 {% pre clear copyButton label='Clear example' %}
 Using clear, copyButton and label parameters
 {% endpre %}
 
-
 <hr>
+
 <p>
   The following example generates a copy button and demonstrates the default usage of <code>noselect</code>,
   which renders an unselectable dollar sign followed by a space.
@@ -73,8 +101,8 @@ Using clear, copyButton and label parameters
 {% noselect %}Contents of pre tag
 {% endpre %}
 
-
 <hr>
+
 <p>
   This example generates a copy button and demonstrates multi-line <code>noselect</code> contents being used twice:
   the first time to render an unselectable custom prompt,
@@ -88,8 +116,8 @@ This is line 2
 This is line 3 of noselect %}
 {% endpre %}
 
-
 <hr>
+
 <p>
   This example generates a copy button and demonstrates the <code>noselect</code> tag being used twice:
   the first time to render an unselectable custom prompt,
@@ -101,8 +129,8 @@ This is line 3 of noselect %}
 {% noselect How now brown cow %}
 {% endpre %}
 
-
 <hr>
+
 {% pre copyButton number label="Numbered lines" %}
 Line 1
   Line 2
@@ -113,8 +141,8 @@ Line 1
 Line 7
 {% endpre %}
 
-
 <hr>
+
 <p>
   A regular expression can be passed to the highlight option.
   This causes text that matches the regex pattern to be wrapped within a
@@ -144,8 +172,8 @@ Line 1
 Line 7
 {% endpre %}
 
-
 <hr>
+
 <p>
   Regular expressions match against lines, which are delimited view newlines (<code>\n</code>).
   Thus, to match an entire line that contains a phrase, specify the regex as <code>.*phrase.*</code>.

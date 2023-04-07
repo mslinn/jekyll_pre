@@ -63,6 +63,11 @@ header > .inner {
   padding-top: 40px;
 }
 
+hr {
+  margin-bottom: 2em;
+  margin-top: 2em;
+}
+
 nav#sidebar {
   float: right;
   font-family: "Helvetica Neue", Helvetica, Arial, serif;

@@ -1,3 +1,6 @@
+## 1.3.1
+  * Added `wrapper_class` and `wrapper_style` name/value options.
+
 ## 1.3.0
   * Updated to `jekyll_plugin_support` v0.6.0 for attribution support.
 

@@ -35,14 +35,16 @@ module PreTagBlock
       text.strip!
       @helper.gem_file __FILE__ # Enables plugin attribution
 
-      @clear = @helper.parameter_specified? 'clear'
       @class = @helper.parameter_specified? 'class'
+      @clear = @helper.parameter_specified? 'clear'
+      @dark = ' dark' if @helper.parameter_specified? 'dark'
       @highlight = @helper.parameter_specified? 'highlight'
+      @label = @helper.parameter_specified? 'label'
       @make_copy_button = @helper.parameter_specified? 'copyButton'
       @number_lines = @helper.parameter_specified? 'number'
-      @dark = ' dark' if @helper.parameter_specified? 'dark'
       @style = @helper.parameter_specified? 'style'
-      @label = @helper.parameter_specified? 'label'
+      @wrapper_class = @helper.parameter_specified? 'wrapper_class'
+      @wrapper_style = @helper.parameter_specified? 'wrapper_style'
 
       # If a label was specified, use it, otherwise concatenate any dangling parameters and use that as the label
       @label ||= @helper.argv.join(' ')
@@ -81,9 +83,11 @@ module PreTagBlock
       pre_content = "#{copy_button}#{content}"
       attribution = @helper.attribute if @helper.attribution
       <<~END_OUTPUT
+        <div class="#{@wrapper_class}" style="#{@wrapper_style}">
         #{@label}
         <pre data-lt-active='false' class='#{classes}'#{@style} id='#{pre_id}'>#{pre_content}</pre>
         #{attribution}
+        </div>
       END_OUTPUT
     end
 

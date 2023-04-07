@@ -200,7 +200,9 @@ ol li .codeLabel {
   padding-left: 1.75em;
 }
 
-.jekyll_pre {}
+.jekyll_pre {
+  display: inline-block;
+}
 
 .maxOneScreenHigh {
   max-height: 500px;

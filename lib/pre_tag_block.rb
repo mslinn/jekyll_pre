@@ -46,6 +46,11 @@ module PreTagBlock
       @wrapper_class = @helper.parameter_specified? 'wrapper_class'
       @wrapper_style = @helper.parameter_specified? 'wrapper_style'
 
+      @class = @class ? " #{@class}" : ''
+      @style = @style ? " style='#{@style}'" : ''
+      @wrapper_class = @wrapper_class ? " #{@wrapper_class}" : ''
+      @wrapper_style = @wrapper_style ? " style='#{@wrapper_style}'" : ''
+
       # If a label was specified, use it, otherwise concatenate any dangling parameters and use that as the label
       @label ||= @helper.argv.join(' ')
 
@@ -64,8 +69,6 @@ module PreTagBlock
           label_clear = ' clear'
         end
       end
-      @class = @class ? " #{@class}" : ''
-      @style = @style ? " style='#{@style}'" : ''
       dark_label = ' darkLabel' if @dark
       @label = if @label.to_s.empty?
                  ''
@@ -83,7 +86,7 @@ module PreTagBlock
       pre_content = "#{copy_button}#{content}"
       attribution = @helper.attribute if @helper.attribution
       <<~END_OUTPUT
-        <div class="#{@wrapper_class}" style="#{@wrapper_style}">
+        <div class="jekyll_pre#{@wrapper_class}" #{@wrapper_style}>
         #{@label}
         <pre data-lt-active='false' class='#{classes}'#{@style} id='#{pre_id}'>#{pre_content}</pre>
         #{attribution}

@@ -29,7 +29,8 @@ module ExecTag
     rescue PreError => e
       raise PreError, e.message, []
     rescue StandardError => e
-      msg = self.class.remove_html_tags(e.message) + " from executing '#{@original_command}' on line #{@line_number} (after front matter) of #{@page['path']}"
+      msg = self.class.remove_html_tags(e.message) +
+            " from executing '#{@original_command}' on line #{@line_number} (after front matter) of #{@page['path']}"
       raise PreError, msg.red, [] if @die_if_error
     end
 
@@ -87,7 +88,8 @@ module ExecTag
       @child_status = $CHILD_STATUS
       result
     rescue StandardError => e
-      msg = self.class.remove_html_tags(e.message) + " from executing '#{@original_command}' on line #{@line_number} (after front matter) of #{@page['path']}"
+      msg = self.class.remove_html_tags(e.message) +
+            " from executing '#{@original_command}' on line #{@line_number} (after front matter) of #{@page['path']}"
       raise PreError, msg.red, [] if @die_if_error
     ensure
       @child_status = $CHILD_STATUS

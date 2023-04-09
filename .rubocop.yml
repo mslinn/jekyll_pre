@@ -20,7 +20,8 @@ Gemspec/RequireMFA:
   Enabled: false
 
 Layout/HashAlignment:
-  Enabled: false
+  EnforcedColonStyle: table
+  EnforcedHashRocketStyle: table
 
 Layout/LineLength:
   Max: 150

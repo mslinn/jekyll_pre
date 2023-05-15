@@ -202,8 +202,13 @@ ol li .codeLabel {
 
 .jekyll_pre {
   display: inline-block;
+  margin-bottom: 30px;
   max-width: 100%;
   width: 100%;
+}
+
+.jekyll_pre + ul, .jekyll_pre + ol, .jekyll_pre + dl {
+  margin-top: 0;
 }
 
 .maxOneScreenHigh {

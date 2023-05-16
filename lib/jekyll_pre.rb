@@ -11,7 +11,7 @@ PreError = Class.new(Liquid::Error)
 module JekyllPreModule
   include NoSelectTag
   include PreTagBlock
-  include ExecTag
+  include ExecTagModule
 end
 
 PluginMetaLogger.instance.info { "Loaded #{JekyllPluginPreName::PLUGIN_NAME} v#{JekyllPreVersion::VERSION} plugin." }

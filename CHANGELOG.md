@@ -1,3 +1,6 @@
+## 1.3.2
+  * No longer strips leading spaces from exec result lines.
+
 ## 1.3.1
   * Generates outer `div` with `jekyll_pre` class, like this:
     ```html

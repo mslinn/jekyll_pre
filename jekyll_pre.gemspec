@@ -1,3 +1,4 @@
+require 'jekyll'
 require_relative 'lib/jekyll_pre/version'
 
 Gem::Specification.new do |spec|

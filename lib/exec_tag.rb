@@ -1,9 +1,18 @@
-require 'jekyll_plugin_support'
+require 'rack/utils'
 require_relative 'jekyll_pre/version'
 
-module ExecTag
+module ExecTagModule
+  def self.compress(response, no_strip)
+    result = response.chomp
+    result = result.strip unless no_strip
+    result = result.gsub('\n\n', '<br>\n')
+    result = Rack::Utils.escape_html(result) unless @no_escape
+    result
+  end
+
   class ExecTag < JekyllSupport::JekyllTag
     include JekyllPreVersion
+    include ::ExecTagModule
 
     def self.remove_html_tags(string)
       string.gsub(/<[^>]*>/, '')
@@ -17,7 +26,7 @@ module ExecTag
 
       response = run_command(command)
       response = if @child_status.success?
-                   compress(response)
+                   ExecTagModule.compress(response, @no_strip)
                  else
                    handle_error(command)
                  end
@@ -35,14 +44,6 @@ module ExecTag
     end
 
     private
-
-    def compress(response)
-      result = response.chomp
-      result = result.strip unless @no_strip
-      result = result.gsub('\n\n', '<br>\n')
-      result = Rack::Utils.escape_html(result) unless @no_escape
-      result
-    end
 
     def die(msg)
       msg_no_html = self.class.remove_html_tags(msg)

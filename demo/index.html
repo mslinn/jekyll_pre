@@ -23,7 +23,7 @@ Uses:
 {% endpre %}
 
 
-<h2 id="exec">Attribution</h2>
+<h2 id="attr">Attribution</h2>
 {% pre attribution copyButton label="attribution test" %}
 {% noselect %}{% exec pwd %}
 {% endpre %}
@@ -38,6 +38,12 @@ Uses:
 
 {% pre copyButton label="exec echo &dollar;USER" %}
 {% noselect %}{% exec echo $USER %}
+{% endpre %}
+
+<hr>
+
+{% pre copyButton label="exec man man" %}
+{% noselect %}{% exec man man %}
 {% endpre %}
 
 <hr>

@@ -4,6 +4,15 @@
 
 # dispatcher-port and dispatcher-port are arbitrarily chosen to prevent conflicts with other instances.
 
+if [ "$1" == -h ] || [ "$1" == -? ]; then
+  echo "Run this Jekyll instance under a debugger so it can be attached to.
+Usage: debug [OPTIONS]
+Where OPTIONS can be:
+  -r Run without debugger
+"
+  exit 1
+fi
+
 run="serve \
     --livereload_port 25721 \
     --force_polling \

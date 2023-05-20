@@ -15,6 +15,7 @@ This Jekyll plugin provides 3 new Liquid tags that work together:
      - `clear` &ndash; Line break after floating HTML elements
      - `copyButton` &ndash; Generate a copy button
      - `dark` &ndash; Dark mode
+     - `dedent` &ndash; Remove leading spaces common to all lines, like Ruby's <<~ squiggly heredoc (default is false)
      - `label='This is a label'` &ndash; Apply text above `pre` tag.
         The `label` parameter value can also be specified in free text.
         For example, the following produce the same results:

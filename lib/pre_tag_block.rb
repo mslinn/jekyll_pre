@@ -33,7 +33,7 @@ module JekyllPreModule
 
     # remove leading blank lines and trailing whitespace
     def self.remove_surrounding(text)
-      text.gsub(/(\s\n)*/, '').rstrip
+      text.gsub(/\A(\s?\n)*/, '').rstrip
     end
 
     def option(name)

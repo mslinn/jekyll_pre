@@ -63,6 +63,24 @@ This Jekyll plugin provides 3 new Liquid tags that work together:
 See [`demo/assets/css/style.css`](demo/assets/css/style.css) for the CSS declarations,
 between `/* Start of pre tag css */` and `/* End of pre tag css */`.
 
+## Configuration
+Default options can be set for the `pre` tag by entries in `_config.yml`.
+This demonstrates setting a default value for every possible option:
+
+```yml
+pre:
+  class: 'font-face: courier'
+  clear: true
+  dark: true
+  dedent: true
+  highlight: 'Error:.*'
+  label: Shell
+  copyButton: true
+  number: true
+  style: 'padding: 2em; border: thin green dashed'
+  wrapper_class: rounded shadow
+  wrapper_style: 'background-color: yellow;'
+```
 
 ## Additional Information
 More information is available on [my website](https://www.mslinn.com/blog/2020/10/03/jekyll-plugins.html#jekyll_pre).

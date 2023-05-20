@@ -34,6 +34,11 @@ module JekyllPreModule
     def render_impl(text)
       @helper.gem_file __FILE__ # Enables plugin attribution
 
+      x = @config
+      y = @config.pre
+      z = @config.pre['dedent']
+
+      @dedent = @helper.parameter_specified? 'dedent' | @config.pre['dedent']
       @class = @helper.parameter_specified? 'class'
       @clear = @helper.parameter_specified? 'clear'
       @dark = ' dark' if @helper.parameter_specified? 'dark'

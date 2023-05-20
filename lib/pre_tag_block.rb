@@ -31,24 +31,29 @@ module JekyllPreModule
       result
     end
 
+    def option(name)
+      value = @helper.parameter_specified? name
+      return value unless value.nil?
+
+      @pre_config[name] if @pre_config
+    end
+
     def render_impl(text)
       @helper.gem_file __FILE__ # Enables plugin attribution
 
-      x = @config
-      y = @config.pre
-      z = @config.pre['dedent']
+      @pre_config = @config['pre']
 
-      @dedent = @helper.parameter_specified? 'dedent' | @config.pre['dedent']
-      @class = @helper.parameter_specified? 'class'
-      @clear = @helper.parameter_specified? 'clear'
-      @dark = ' dark' if @helper.parameter_specified? 'dark'
-      @highlight = @helper.parameter_specified? 'highlight'
-      @label = @helper.parameter_specified? 'label'
-      @make_copy_button = @helper.parameter_specified? 'copyButton'
-      @number_lines = @helper.parameter_specified? 'number'
-      @style = @helper.parameter_specified? 'style'
-      @wrapper_class = @helper.parameter_specified? 'wrapper_class'
-      @wrapper_style = @helper.parameter_specified? 'wrapper_style'
+      @class            = option 'class'
+      @clear            = option 'clear'
+      @dark             = ' dark' if option 'dark'
+      @dedent           = option 'dedent'
+      @highlight        = option 'highlight'
+      @label            = option 'label'
+      @make_copy_button = option 'copyButton'
+      @number_lines     = option 'number'
+      @style            = option 'style'
+      @wrapper_class    = option 'wrapper_class'
+      @wrapper_style    = option 'wrapper_style'
 
       @class = @class ? " #{@class}" : ''
       @style = @style ? " style='#{@style}'" : ''
@@ -60,7 +65,7 @@ module JekyllPreModule
 
       @logger.debug { "@make_copy_button = '#{@make_copy_button}'; @label = '#{@label}'" }
 
-      text = text.dedent
+      text = text.dedent if @dedent
       make_pre(text)
     end
 

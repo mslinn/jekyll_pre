@@ -8,10 +8,14 @@ require_relative './pre_tag_block'
 
 PreError = Class.new(Liquid::Error)
 
-module JekyllPreModule
-  include NoSelectTag
-  include PreTagBlock
-  include ExecTagModule
+class String
+  # Works like <<~ from Ruby 2.3.0
+  def dedent
+    # Find the margin whitespace on the first line
+    margin = self[/\A\s*/]
+    # Remove margin-sized whitespace from each line
+    gsub(/\n\s{#{margin.size}}/, "\n").lstrip
+  end
 end
 
 PluginMetaLogger.instance.info { "Loaded #{JekyllPluginPreName::PLUGIN_NAME} v#{JekyllPreVersion::VERSION} plugin." }

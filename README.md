@@ -80,7 +80,7 @@ end
 
 And then execute:
 
-    $ bundle install
+    $ bundle
 
 
 ## Usage

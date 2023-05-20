@@ -1,3 +1,7 @@
+## 1.4.0
+  * Added `dedent` option and config setting.
+  * No longer dies when exec is passed an empty string, or a string with just whitespace.
+
 ## 1.3.2
   * No longer strips leading spaces from exec result lines.
 

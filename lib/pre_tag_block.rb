@@ -1,7 +1,7 @@
 require 'jekyll_plugin_support'
 require_relative 'jekyll_pre/version'
 
-module PreTagBlock
+module JekyllPreModule
   class PreTagBlock < JekyllSupport::JekyllBlock
     include JekyllPreVersion
 
@@ -32,7 +32,6 @@ module PreTagBlock
     end
 
     def render_impl(text)
-      text.strip!
       @helper.gem_file __FILE__ # Enables plugin attribution
 
       @class = @helper.parameter_specified? 'class'
@@ -55,6 +54,8 @@ module PreTagBlock
       @label ||= @helper.argv.join(' ')
 
       @logger.debug { "@make_copy_button = '#{@make_copy_button}'; @label = '#{@label}'" }
+
+      text = text.dedent
       make_pre(text)
     end
 

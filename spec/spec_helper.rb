@@ -1,6 +1,8 @@
 require 'jekyll'
 require 'fileutils'
 require 'key_value_parser'
+require 'jekyll_plugin_support'
+require 'rack/utils'
 require 'shellwords'
 
 require_relative '../lib/jekyll_pre'

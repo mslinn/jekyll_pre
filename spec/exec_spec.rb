@@ -1,9 +1,7 @@
 require_relative '../lib/jekyll_pre'
 
 module ExecTagSpec
-  extend ExecTagModule
-
-  RSpec.describe('misc') do
+  RSpec.describe(JekyllPreModule) do
     it 'strips properly' do
       content = <<~END_CONTENT
         Line 1
@@ -17,7 +15,7 @@ module ExecTagSpec
           Line 9
         Line 10
       END_CONTENT
-      actual = ExecTagSpec.compress content, false
+      actual = described_class.compress content, false
       expected = <<~END_CONTENT
         Line 1
           Line 2
@@ -30,7 +28,7 @@ module ExecTagSpec
           Line 9
         Line 10
       END_CONTENT
-      expect(expected).to eq(actual)
+      expect(expected.strip).to eq(actual)
     end
   end
 end

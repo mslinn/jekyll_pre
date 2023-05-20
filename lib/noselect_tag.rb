@@ -1,7 +1,7 @@
 require 'jekyll_plugin_support'
 require_relative 'jekyll_pre/version'
 
-module NoSelectTag
+module JekyllPreModule
   # """\\{% noselect %} or \\{% noselect this all gets copied.
   # Also, space before the closing percent is signficant %}"""
   class NoSelectTag < JekyllSupport::JekyllTagNoArgParsing

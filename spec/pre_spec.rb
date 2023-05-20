@@ -4,7 +4,36 @@ require 'key_value_parser'
 require 'shellwords'
 require_relative '../lib/jekyll_pre'
 
-RSpec.describe(PreTagBlock) do
+RSpec.describe(JekyllPreModule::PreTagBlock) do
+  it 'dedents content lines' do
+    content = <<-END_CONTENT
+      Line 1
+        Line 2
+          Line 3
+          Line 4
+        Line 5
+      Line 6
+      Line 7
+        Line 8
+        Line 9
+      Line 10
+    END_CONTENT
+    expected = <<~END_CONTENT
+      Line 1
+        Line 2
+          Line 3
+          Line 4
+        Line 5
+      Line 6
+      Line 7
+        Line 8
+        Line 9
+      Line 10
+    END_CONTENT
+    actual = content.dedent
+    expect(actual).to eq(expected)
+  end
+
   it 'parses arguments' do
     argv = Shellwords.split 'number copyButton shell'
     options = KeyValueParser.new.parse(argv)

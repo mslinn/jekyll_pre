@@ -1,7 +1,8 @@
+require 'jekyll_plugin_support'
 require 'rack/utils'
 require_relative 'jekyll_pre/version'
 
-module ExecTagModule
+module JekyllPreModule
   def self.compress(response, no_strip)
     result = response.chomp
     result = result.strip unless no_strip
@@ -12,7 +13,6 @@ module ExecTagModule
 
   class ExecTag < JekyllSupport::JekyllTag
     include JekyllPreVersion
-    include ::ExecTagModule
 
     def self.remove_html_tags(string)
       string.gsub(/<[^>]*>/, '')
@@ -22,7 +22,14 @@ module ExecTagModule
       parse_args
       @original_command = @helper.remaining_markup_original
       command = JekyllPluginHelper.expand_env @original_command
-      raise PreError, "Command is empty on on line #{@line_number} (after front matter) of #{@page['path']}", [] if command.strip.empty?
+      if command.strip.empty?
+        msg = "Command is empty on on line #{@line_number} (after front matter) of #{@page['path']}"
+        unless @die_if_error
+          @logger.warn { msg }
+          return ''
+        end
+        raise PreError, msg, []
+      end
 
       response = run_command(command)
       response = if @child_status.success?

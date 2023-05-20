@@ -34,6 +34,41 @@ RSpec.describe(JekyllPreModule::PreTagBlock) do
     expect(actual).to eq(expected)
   end
 
+  it 'removes surrounding whitespace' do
+    text = <<-END_CONTENT
+
+
+      Line 1
+        Line 2
+          Line 3
+          Line 4
+        Line 5
+      Line 6
+      Line 7
+        Line 8
+        Line 9
+      Line 10
+
+
+    END_CONTENT
+    actual = described_class.remove_surrounding(text)
+
+    expected = <<-END_CONTENT
+      Line 1
+        Line 2
+          Line 3
+          Line 4
+        Line 5
+      Line 6
+      Line 7
+        Line 8
+        Line 9
+      Line 10
+    END_CONTENT
+
+    expect(actual).to eq(expected.rstrip)
+  end
+
   it 'parses arguments' do
     argv = Shellwords.split 'number copyButton shell'
     options = KeyValueParser.new.parse(argv)

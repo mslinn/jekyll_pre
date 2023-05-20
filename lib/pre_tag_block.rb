@@ -31,6 +31,11 @@ module JekyllPreModule
       result
     end
 
+    # remove leading blank lines and trailing whitespace
+    def self.remove_surrounding(text)
+      text.gsub(/(\s\n)*/, '').rstrip
+    end
+
     def option(name)
       value = @helper.parameter_specified? name
       return value unless value.nil?
@@ -39,6 +44,8 @@ module JekyllPreModule
     end
 
     def render_impl(text)
+      text = PreTagBlock.remove_surrounding text
+
       @helper.gem_file __FILE__ # Enables plugin attribution
 
       @pre_config = @config['pre']

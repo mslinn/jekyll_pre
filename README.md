@@ -64,13 +64,14 @@ This Jekyll plugin provides 3 new Liquid tags that work together:
 See [`demo/assets/css/style.css`](demo/assets/css/style.css) for the CSS declarations,
 between `/* Start of pre tag css */` and `/* End of pre tag css */`.
 
+
 ## Configuration
 Default options can be set for the `pre` tag by entries in `_config.yml`.
-This demonstrates setting a default value for every possible option:
+The following demonstrates setting a default value for every possible option:
 
 ```yml
 pre:
-  class: 'font-face: courier'
+  class: bg_yellow
   clear: true
   dark: true
   dedent: true
@@ -78,13 +79,24 @@ pre:
   label: Shell
   copyButton: true
   number: true
-  style: 'padding: 2em; border: thin green dashed'
+  style: 'font-face: courier'
   wrapper_class: rounded shadow
-  wrapper_style: 'background-color: yellow;'
+  wrapper_style: 'padding: 2em; border: thin green dashed;'
 ```
 
+The default values used on [`mslinn.com`](https://www.mslinn.com) are:
+
+```yml
+pre:
+  dedent: true
+  label: Shell
+  copyButton: true
+```
+
+
 ## Additional Information
-More information is available on [my website](https://www.mslinn.com/blog/2020/10/03/jekyll-plugins.html#jekyll_pre).
+More information is available on
+[Mike Slinn&rsquo;s website](https://www.mslinn.com/jekyll_plugins/jekyll_pre.html).
 
 
 ## Installation
@@ -103,7 +115,20 @@ And then execute:
 
 
 ## Usage
-The following examples are rendered on [my website](https://www.mslinn.com/blog/2020/10/03/jekyll-plugins.html#jekyll_pre).
+The following examples are rendered on
+[Mike Slinn&rsquo;s website](https://www.mslinn.com/jekyll_plugins/jekyll_pre.html).
+
+### Example 0
+<pre data-lt-active="false" class="maxOneScreenHigh copyContainer" id="id110c50d624b4">{% pre dedent %}
+    This line was indented 4 spaces
+      This line was indented 6 spaces
+    This line was indented 4 spaces
+{% endpre %}</pre>
+Which renders as:
+
+<pre data-lt-active="false" class="maxOneScreenHigh copyContainer" id="id377433c30186">This line was indented 4 spaces
+  This line was indented 6 spaces
+This line was indented 4 spaces</pre>
 
 ### Example 1
 This example does not generate a copy button and does not demonstrate `noselect`.

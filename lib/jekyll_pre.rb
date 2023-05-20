@@ -14,7 +14,7 @@ class String
     # Find the margin whitespace on the first line
     margin = self[/\A\s*/]
     # Remove margin-sized whitespace from each line
-    gsub(/\n\s{#{margin.size}}/, "\n").lstrip
+    gsub(/^\s{#{margin.size}}/, '')
   end
 end
 

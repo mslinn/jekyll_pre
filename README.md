@@ -100,7 +100,7 @@ The above causes the label to be `die_if_error=false`.
 ```
 {% exec die_if_error=false ls %} ... {% endpre %}
 ```
-The above causes the label to be `die_if_error=false ls`.
+The above causes the command to be executed to be `die_if_error=false ls` instead of `ls`.
 
 
 #### Specifying Default Option Values

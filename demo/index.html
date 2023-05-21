@@ -3,12 +3,6 @@ description: Jekyll pre plugin demo
 layout: default
 title: Welcome
 ---
-{% pre clear copyButton label='Exec without error' %}
-{% noselect %}{% exec die_if_nonzero='false' ls -alF / %}
-{% endpre %}
-
-<hr>
-
 <h2 id="dedent">Dedent</h2>
 {% pre copyButton label="dedent test (leading spaces removed)" %}
           These lines were indented by 10 spaces, but none should be displayed

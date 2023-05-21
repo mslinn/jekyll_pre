@@ -103,24 +103,6 @@ The above causes the label to be `die_if_error=false`.
 The above causes the command to be executed to be `die_if_error=false ls` instead of `ls`.
 
 
-#### Specifying Default Option Values
-Specifying a default value for `die_if_error` in `_config.yml` could be done as follows:
-```yaml
-pre:
-  die_if_error: true
-```
-
-```yaml
-pre:
-  die_if_error: "true"
-```
-
-```yaml
-pre:
-  die_if_error: 'true'
-```
-
-
 ## CSS
 See [`demo/assets/css/style.css`](demo/assets/css/style.css) for the CSS declarations,
 between `/* Start of pre tag css */` and `/* End of pre tag css */`.
@@ -152,6 +134,24 @@ pre:
   dedent: true
   label: Shell
   copyButton: true
+```
+
+
+#### Specifying Default Option Values
+Specifying a default value for `die_if_error` in `_config.yml` could be done as follows:
+```yaml
+pre:
+  die_if_error: true
+```
+
+```yaml
+pre:
+  die_if_error: "true"
+```
+
+```yaml
+pre:
+  die_if_error: 'true'
 ```
 
 

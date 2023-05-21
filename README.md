@@ -87,7 +87,7 @@ Or writing:
 ```
 
 Neglecting to provide surrounding quotes around the provided value causes the parser to not recognize the option.
-Instead, what you had intended to be the keyword/value pair is instead parsed as part of the command.
+Instead, what you had intended to be the keyword/value pair will be parsed as part of the command.
 For the `pre` tag, this means the erroneous string becomes part of the `label` value, unless `label` is explicitly specified.
 For the `exec` tag, this means the erroneous string becomes part of the command to execute.
 The following demonstrates the error.

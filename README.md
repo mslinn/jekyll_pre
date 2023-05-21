@@ -59,6 +59,67 @@ This Jekyll plugin provides 3 new Liquid tags that work together:
      - `wrapper_class` class applied to outer `div`.
      - `wrapper_style` style applied to outer `div`.
 
+## Keyword Options
+For all keyword options, including keyword options for the `pre` and `exec` tags:
+
+ - Option values specified in the document *may* be provided.
+   If a value is not provided, the value `true` is assumed.
+   Otherwise, if a value is provided, it *must* be wrapped in single or double quotes.
+
+ - Option values specified in `_config.yml` *must* be provided, and the value `true` cannot be implied.
+   Values that do not contain special characters *may* be wrapped in single or double quotes.
+
+### Examples
+#### Specifying Tag Option Values
+The following sets `die_if_error` `true`:
+```
+{% pre die_if_error %} ... {% endpre %}
+```
+
+The above is the same as writing:
+```
+{% pre die_if_error='true' %} ... {% endpre %}
+```
+
+Or writing:
+```
+{% pre die_if_error="true" %} ... {% endpre %}
+```
+
+Neglecting to provide surrounding quotes around the provided value causes the parser to not recognize the option.
+Instead, what you had intended to be the keyword/value pair is instead parsed as part of the command.
+For the `pre` tag, this means the erroneous string becomes part of the `label` value, unless `label` is explicitly specified.
+For the `exec` tag, this means the erroneous string becomes part of the command to execute.
+The following demonstrates the error.
+
+```
+{% pre die_if_error=false %} ... {% endpre %}
+```
+The above causes the label to be `die_if_error=false`.
+
+```
+{% exec die_if_error=false ls %} ... {% endpre %}
+```
+The above causes the label to be `die_if_error=false ls`.
+
+
+#### Specifying Default Option Values
+Specifying a default value for `die_if_error` in `_config.yml` could be done as follows:
+```yaml
+pre:
+  die_if_error: true
+```
+
+```yaml
+pre:
+  die_if_error: "true"
+```
+
+```yaml
+pre:
+  die_if_error: 'true'
+```
+
 
 ## CSS
 See [`demo/assets/css/style.css`](demo/assets/css/style.css) for the CSS declarations,
@@ -262,7 +323,7 @@ The following executes `ls -alF /` and displays the output.
 
 ```
 {% pre clear copyButton label='Exec without error' %}
-{% noselect %}{% exec die_if_nonzero=false ls -alF / %}
+{% noselect %}{% exec die_if_nonzero='false' ls -alF / %}
 {% endpre %}
 ```
 
@@ -271,7 +332,7 @@ The following changes to the home directory (`$HOME`), then executes `pwd` and d
 
 ```
 {% pre clear copyButton label='Exec without error' %}
-{% noselect %}{% exec cd="$HOME" die_if_nonzero=false pwd %}
+{% noselect %}{% exec cd="$HOME" die_if_nonzero='false' pwd %}
 {% endpre %}
 ```
 
@@ -280,7 +341,7 @@ The following executes `echo $USER` and displays the output.
 
 ```
 {% pre clear copyButton label='Exec display &dollar;USER' %}
-{% noselect %}{% exec die_if_nonzero=false echo $USER %}
+{% noselect %}{% exec die_if_nonzero='false' echo $USER %}
 {% endpre %}
 ```
 

@@ -5,7 +5,7 @@ title: Welcome
 ---
 <h2 id="dedent">Dedent</h2>
 {% pre copyButton label="dedent test (leading spaces removed)" %}
-          These lines were indented by 10 spaces, but none should be displayed
+          These lines were indented by 10 spaces, but none should be displayed.
           line 1
             line 2
               line 3
@@ -13,13 +13,21 @@ title: Welcome
           line 5
 {% endpre %}
 {% pre copyButton dedent=false label="dedent test (leading spaces preserved)" %}
-          These lines were indented by 10 spaces, and they should be displayed
+          These lines were indented by 10 spaces, and they should be displayed.
           line 1
             line 2
               line 3
             line 4
           line 5
 {% endpre %}
+    {% pre copyButton dedent label="dedent test (all left-justified)" %}
+        These lines were indented by 8 spaces, but none should be displayed.
+        line 1
+        line 2
+        line 3
+        line 4
+        line 5
+    {% endpre %}
 
 
 <h2 id="wrappers">Wrapper Class and Wrapper Style</h2>

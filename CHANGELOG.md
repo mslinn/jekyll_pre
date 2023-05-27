@@ -1,3 +1,6 @@
+## 1.4.1
+  * Fixed problem that caused exec tag to no produce output.
+
 ## 1.4.0
   * Added `dedent` option and config setting.
   * No longer dies when exec is passed an empty string, or a string with just whitespace.

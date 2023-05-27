@@ -33,7 +33,7 @@ module JekyllPreModule
 
       response = run_command(command)
       response = if @child_status.success?
-                   ExecTagModule.compress(response, @no_strip)
+                   JekyllPreModule.compress(response, @no_strip)
                  else
                    handle_error(command)
                  end

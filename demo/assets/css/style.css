@@ -221,6 +221,10 @@ ol li .codeLabel {
   color: #5fb25f;
 }
 
+.pre_tag {
+  margin-bottom: 1em;
+}
+
 .unselectable {
   color: #7922f9;
   -moz-user-select: none;

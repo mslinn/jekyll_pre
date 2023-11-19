@@ -1,0 +1,28 @@
+.clear {
+  clear: both;
+}
+
+ol li .codeLabel {
+  padding-left: 1.75em;
+}
+
+.jekyll_pre {
+  display: inline-block;
+  margin-bottom: 30px;
+  max-width: 100%;
+  width: 100%;
+}
+
+.jekyll_pre + ul, .jekyll_pre + ol, .jekyll_pre + dl {
+  margin-top: 0;
+}
+
+.pre_tag {
+  margin-bottom: 1em;
+}
+
+.error {
+  color: white;
+  background-color: darkred;
+  padding: 2px;
+}

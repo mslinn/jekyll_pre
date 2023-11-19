@@ -307,7 +307,9 @@ The CSS stylesheet used for this page contains the following:
 }
 ```
 
-This example demonstrates highlighting text that matches a regular expression. Regular expressions match against lines, which are delimited via newlines (\n).
+This example demonstrates highlighting text that matches a regular expression.
+Regular expressions match against lines,
+which are delimited via newlines (\n).
 
 ```html
 {% pre copyButton highlight="Line 2" %}

@@ -12,12 +12,9 @@ layout: compress
   {% capture page.title %}{{ page.title | default: page.subtitle }}{% endcapture %}
   {% assign nowMillis = site.time | date: '%s' %}
   <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: nowMillis }}" type="text/css">
-
-  {% assign csses = page.css | default: layout.css %}
-  {% for css in csses %}
-    <link rel="stylesheet" href="{{css | append: '?v=' | append: nowMillis }}" type="text/css">
-  {% endfor %}
-
+  <link rel="stylesheet" href="{{ '/assets/css/jekyll_pre.css?v=' | append: nowMillis }}" type="text/css">
+  <link rel="stylesheet" href="{{ '/assets/css/jekyll_plugin_support.css?v=' | append: nowMillis }}" type="text/css">
+  <link rel="stylesheet" href="{{ '/assets/css/shared_include_pre.css?v=' | append: nowMillis }}" type="text/css">
   <link rel="icon" type="image/png" href="/assets/images/favicon.png">
   <!--[if lt IE 9]>
   <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -44,8 +41,6 @@ layout: compress
       <nav id="sidebar">
         <ul>
           <li><a href="/index.html">Welcome!</a></li>
-          <li><a href="/blog/blogsByDate.html">Blog</a></li>
-          <li><a href="/categories/">Categories</a></li>
         </ul>
       </nav>
       <section id="main-content">

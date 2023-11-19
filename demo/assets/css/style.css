@@ -18,7 +18,7 @@ body {
   margin: 0;
 }
 
-code, pre, tt, .codeLabel {
+code, pre, tt {
   font-family: Monaco,"Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
   font-stretch: semi-condensed;
 }
@@ -107,162 +107,14 @@ header, #main-content {
   padding-top: 0;
 }
 
-.bg_yellow, .bg_light_yellow {
+.bg_light_yellow {
   padding-left: 0.5em;
   padding-right: 0.5em;
-}
-
-.bg_yellow {
-  background-color: yellow;
-  padding: 2px;
 }
 
 .clear {
   clear: both;
 }
-
-
-/* Start of pre tag css */
-
-pre.dark {
-  color: #eee;
-  background-color: #222;
-}
-
-pre.dark .unselectable,
-pre.dark .unselectable > code {
-  color: rgb(155, 150, 150);
-}
-
-.codeLabel {
-  color: white;
-  background-color: #666;
-  margin-bottom: 0;
-  padding-bottom: 2px;
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-top: 2px;
-  font-stretch: semi-condensed;
-}
-
-.darkLabel {
-  color: ivory;
-}
-
-li div.codeLabel {
-  padding-left: 2em;
-}
-
-.codeLabel.unselectable, div.codeLabel.unselectable > code {
-  color: yellow;
-}
-
-.codeLabel + pre {
-  margin-top: 0;
-}
-
-.codeLabel a {
-  color: #c0e6fb;
-}
-
-.codeLabel a:hover {
-  color: #FFE59F;
-}
-
-.copyBtn {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  background-color: #eee;
-  background-image: linear-gradient(#fcfcfc, #eee);
-  border: 1px solid #d5d5d5;
-  border-radius: 3px;
-  color: #333;
-  cursor: pointer;
-  float: right;
-  font-size: 13px;
-  font-weight: 700;
-  line-height: 20px;
-  padding: 2px 2px 0 4px;;
-  position: -webkit-sticky;
-  position: sticky;
-  right: 4px;
-  top: 0;
-  user-select: none;
-  z-index: 1;
-}
-
-.copyContainer {
-  position: relative;
-}
-
-ol li .codeLabel {
-  padding-left: 1.75em;
-}
-
-.jekyll_pre {
-  display: inline-block;
-  margin-bottom: 30px;
-  max-width: 100%;
-  width: 100%;
-}
-
-.jekyll_pre + ul, .jekyll_pre + ol, .jekyll_pre + dl {
-  margin-top: 0;
-}
-
-.maxOneScreenHigh {
-  max-height: 500px;
-}
-
-.numbered_line,
-.unselectable.numbered_line,
-.numbered_line.unselectable {
-  color: #5fb25f;
-}
-
-.pre_tag {
-  margin-bottom: 1em;
-}
-
-.unselectable {
-  color: #7922f9;
-  -moz-user-select: none;
-  -khtml-user-select: none;
-  user-select: none;
-}
-
-.wrap_pre {
-  white-space: pre-wrap;
-}
-
-/* Added for v1.2.2 */
-.error {
-  color: white;
-  background-color: darkred;
-  padding: 2px;
-}
-
-/* Start of jekyll_plugin_support css */
-
-.jps_attribute {
-  display: flex;
-  margin-bottom: 1.5em;
-}
-
-.jps_attribute div {
-  flex-grow: 1;
-  font-family: "Helvetica Neue", Helvetica, Arial, serif;
-  font-size: 8pt;
-  line-height: 1.3;
-  text-align: center;
-  width: 0;
-}
-
-/* End of jekyll_plugin_support css */
-
-/* End of pre tag css */
-
 
 @media only screen and (min-width: 768px) and (max-width: 959px) {
   .inner {

@@ -13,6 +13,10 @@ ol li .codeLabel {
   width: 100%;
 }
 
+.jekyll_pre + p {
+  margin-top: 1em;
+}
+
 .jekyll_pre + ul, .jekyll_pre + ol, .jekyll_pre + dl {
   margin-top: 0;
 }

@@ -1,4 +1,5 @@
 require 'jekyll_plugin_support'
+require 'securerandom'
 require_relative 'jekyll_pre/version'
 
 module JekyllPreModule

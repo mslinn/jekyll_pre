@@ -1,5 +1,10 @@
 # Change Log
 
+## 1.4.3
+
+* Added the `no_stderr` option, which discards any STDERR output.
+
+
 ## 1.4.2
 
 * Added missing `require` in `pre_tag_block.rb`.

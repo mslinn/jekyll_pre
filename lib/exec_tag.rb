@@ -77,31 +77,44 @@ module JekyllPreModule
 
       @no_escape      = @helper.parameter_specified? 'no_escape'
       @no_strip       = @helper.parameter_specified? 'no_strip'
+      @no_stderr      = @helper.parameter_specified? 'no_stderr'
       @die_if_nonzero = @helper.parameter_specified?('die_if_nonzero') # Implies die_if_error
       @die_if_error   = @helper.parameter_specified?('die_if_error') | @die_if_nonzero
     end
 
     # References @cd
     # Defines @child_status
+    # Ignores stderr output
     # @return result of running command
     # @param command [String] Shell command to execute
     def run_command(command)
-      result = if @cd
-                 Dir.chdir(@cd) do
-                   `#{command}`
-                 end
-               else
-                 `#{command}`
-               end
-      @child_status = $CHILD_STATUS
-      result
+      stdout_str = ''
+      stderr_str = ''
+      if @cd
+        Dir.chdir(@cd) do
+          @logger.debug { "Executing '#{command}' from '#{@cd}'" }
+          stdout_str, stderr_str, @child_status = Open3.capture3 command
+        end
+      else
+        @logger.debug { "Executing '#{command}'" }
+        stdout_str, stderr_str, @child_status = Open3.capture3 command
+      end
+      unless @no_stderr
+        stderr_str.strip!
+        unless stderr_str.empty?
+          @logger.info do
+            "'#{command}' STDERR=#{stderr_str}\nThe exec subcommand's 'no_stderr' option suppresses this message."
+          end
+        end
+      end
+      stdout_str
     rescue StandardError => e
       msg = self.class.remove_html_tags(e.message) +
             " from executing '#{@original_command}' on line #{@line_number} (after front matter) of #{@page['path']}"
       raise PreError, msg.red, [] if @die_if_error
     ensure
       @child_status = $CHILD_STATUS
-      result
+      stdout_str
     end
 
     JekyllPluginHelper.register(self, 'exec')

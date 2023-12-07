@@ -113,7 +113,6 @@ module JekyllPreModule
             " from executing '#{@original_command}' on line #{@line_number} (after front matter) of #{@page['path']}"
       raise PreError, msg.red, [] if @die_if_error
     ensure
-      @child_status = $CHILD_STATUS
       stdout_str
     end
 

@@ -1,5 +1,10 @@
 # Change Log
 
+## 1.4.4
+
+* Fixed the empty response problem introduced by v1.4.3.
+
+
 ## 1.4.3
 
 * Added the `no_stderr` option, which discards any STDERR output.

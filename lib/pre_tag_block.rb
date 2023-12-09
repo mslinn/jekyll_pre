@@ -69,7 +69,7 @@ module JekyllPreModule
       @wrapper_style = @wrapper_style ? " style='#{@wrapper_style}'" : ''
 
       # If a label was specified, use it, otherwise concatenate any dangling parameters and use that as the label
-      @label ||= @helper.argv.join(' ')
+      @label = @helper.argv.join(' ') if !@label || @label.to_s == 'true'
 
       @logger.debug { "@make_copy_button = '#{@make_copy_button}'; @label = '#{@label}'" }
 

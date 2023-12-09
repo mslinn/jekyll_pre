@@ -77,6 +77,15 @@ nav#sidebar {
   width: 200px;
 }
 
+p, div, li, dd, dt {
+  font-size: 12pt;
+}
+
+code, tt, pre {
+  font-size: 10.5pt;
+  font-stretch: condensed;
+}
+
 pre {
   background: #78B4DB21;
   border: solid 1px #cecece;
@@ -84,7 +93,6 @@ pre {
   padding: 4px;
   text-indent: initial;
   text-shadow: none;
-  font-size: 9pt;
   margin-bottom: 10px;
   margin-left: 0;
   margin-right: 0;

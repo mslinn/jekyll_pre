@@ -3,6 +3,30 @@ description: Jekyll pre plugin demo
 layout: default
 title: Welcome
 ---
+<!-- #region implicit label -->
+<h2 id="il">Implicit Label</h2>
+<p>
+  The following should be labeled with <code>Labels can be implicit</code>.
+</p>
+{% pre Labels can be implicit %}
+blah blah blah
+{% endpre %}
+
+<p>
+  The following should be labeled with <code>This is another implicit</code>
+  because the <code>label</code> keyword is filtered out of the argument list
+  if not provided in the <code>label</code> parameter value.
+</p>
+{% pre This is another implicit label %}
+blah blah blah
+{% endpre %}
+
+{% pre label="Labels can be explicit too" %}
+blah blah blah
+{% endpre %}
+<!-- endregion -->
+
+<!-- #region dedent -->
 <h2 id="dedent">Dedent</h2>
 {% pre copyButton label="dedent test (leading spaces removed)" %}
           These lines were indented by 10 spaces, but none should be displayed.
@@ -28,8 +52,9 @@ title: Welcome
         line 4
         line 5
     {% endpre %}
+<!-- endregion -->
 
-
+<!-- #region Wrapper Class and Wrapper Style -->
 <h2 id="wrappers">Wrapper Class and Wrapper Style</h2>
 {% pre copyButton label="wrapper_class test" wrapper_class="bg_yellow" %}
 Uses wrapper_class="bg_yellow"
@@ -48,14 +73,17 @@ Uses:
   - wrapper_class="bg_yellow"
   - wrapper_style="max-width: 350px;"
 {% endpre %}
+<!-- endregion -->
 
-
+<!-- #region Attribution -->
 <h2 id="attr">Attribution</h2>
 {% pre attribution copyButton label="attribution test" %}
 {% noselect %}{% exec pwd %}
 {% endpre %}
+<!-- endregion -->
 
 
+<!-- #region exec -->
 <h2 id="exec">Exec</h2>
 {% pre copyButton label="exec pwd  # from &dollar;HOME directory" %}
 {% noselect %}{% exec cd="$HOME" pwd %}
@@ -84,8 +112,10 @@ Uses:
 {% pre copyButton label="exec bad_command &dollar;USER" %}
 {% noselect %}{% exec die_if_nonzero='false' bad_command $USER %}
 {% endpre %}
+<!-- endregion -->
 
 
+<!-- #region Dark Mode -->
 <h2 id="dark">Dark Mode</h2>
 {% pre copyButton dark Dark Mode Example 1 %}
 {% noselect %}Using copyButton and dark parameters, but not using a label parameter.
@@ -98,8 +128,9 @@ Uses:
 {% noselect >>> %}Using copyButton, dark and label parameters
 {% noselect How now brown cow %}
 {% endpre %}
+<!-- endregion -->
 
-
+<!-- #region copyButton -->
 <h2 id="bits">Bit By Bit</h2>
 {% pre %}This example does not generate a copy button and does not demonstrate noselect.{% endpre %}
 
@@ -122,7 +153,6 @@ It does not demonstrate noselect.
 {% pre clear copyButton label='Clear example' %}
 Using clear, copyButton and label parameters
 {% endpre %}
-
 <hr>
 
 <p>
@@ -161,9 +191,11 @@ This is line 3 of noselect %}
 {% noselect >>> %}Contents of pre tag
 {% noselect How now brown cow %}
 {% endpre %}
+<!-- endregion -->
 
 <hr>
 
+<!-- #region numbered lines -->
 {% pre copyButton number label="Numbered lines" %}
 Line 1
   Line 2
@@ -173,9 +205,11 @@ Line 1
   Line 6
 Line 7
 {% endpre %}
+<!-- endregion -->
 
 <hr>
 
+<!-- #region regex -->
 <p>
   A regular expression can be passed to the highlight option.
   This causes text that matches the regex pattern to be wrapped within a
@@ -222,7 +256,7 @@ Line 1
   Line 6
 Line 7
 {% endpre %}
-
+<!-- endregion -->
 
 <script src="/assets/js/clipboard.min.js"></script>
 <script>

@@ -56,7 +56,6 @@ module JekyllPreModule
       @dark             = ' dark' if option 'dark'
       @dedent           = option 'dedent'
       @highlight        = option 'highlight'
-      @label            = option 'label'
       @make_copy_button = option 'copyButton'
       @number_lines     = option 'number'
       @style            = option 'style'
@@ -69,7 +68,9 @@ module JekyllPreModule
       @wrapper_style = @wrapper_style ? " style='#{@wrapper_style}'" : ''
 
       # If a label was specified, use it, otherwise concatenate any dangling parameters and use that as the label
-      @label = @helper.argv.join(' ') if !@label || @label.to_s == 'true'
+      label_implicit = @helper.argv.join(' ')
+      label_option   = option 'label'
+      @label = label_option && label_option.to_s != 'true' ? label_option : label_implicit
 
       @logger.debug { "@make_copy_button = '#{@make_copy_button}'; @label = '#{@label}'" }
 

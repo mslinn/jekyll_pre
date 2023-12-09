@@ -6,22 +6,14 @@ title: Welcome
 <!-- #region implicit label -->
 <h2 id="il">Implicit Label</h2>
 <p>
-  The following should be labeled with <code>Labels can be implicit</code>.
+  The following should be labeled with <code>This is an implicit label</code>.
 </p>
-{% pre Labels can be implicit %}
+{% pre This is an implicit label %}
 blah blah blah
 {% endpre %}
 
-<p>
-  The following should be labeled with <code>This is another implicit</code>
-  because the <code>label</code> keyword is filtered out of the argument list
-  if not provided in the <code>label</code> parameter value.
-</p>
-{% pre This is another implicit label %}
-blah blah blah
-{% endpre %}
 
-{% pre label="Labels can be explicit too" %}
+{% pre label="This is an explicit label" %}
 blah blah blah
 {% endpre %}
 <!-- endregion -->

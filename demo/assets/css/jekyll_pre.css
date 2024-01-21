@@ -34,3 +34,7 @@ ol li .codeLabel {
   background-color: darkred;
   padding: 2px;
 }
+
+.tree {
+  line-height: 1;
+}

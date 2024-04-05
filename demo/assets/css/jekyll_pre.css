@@ -17,12 +17,12 @@ ol li .codeLabel {
   margin-top: 20px;
 }
 
-.jekyll_pre + div, .jekyll_pre + p {
+.jekyll_pre + div,
+.jekyll_pre + p,
+.jekyll_pre + ul,
+.jekyll_pre + ol,
+.jekyll_pre + dl {
   margin-top: 1em;
-}
-
-.jekyll_pre + ul, .jekyll_pre + ol, .jekyll_pre + dl {
-  margin-top: 0;
 }
 
 .pre_tag {

@@ -3,7 +3,7 @@ require 'securerandom'
 require_relative 'jekyll_pre/version'
 
 module JekyllPreModule
-  class PreTagBlock < JekyllSupport::JekyllBlock
+  class PreTagBlock < ::JekyllSupport::JekyllBlock
     include JekyllPreVersion
 
     @@prefix = "<button class='copyBtn' data-clipboard-target="
@@ -114,6 +114,6 @@ module JekyllPreModule
       END_OUTPUT
     end
 
-    JekyllPluginHelper.register(self, 'pre')
+    ::JekyllSupport::JekyllPluginHelper.register(self, 'pre')
   end
 end

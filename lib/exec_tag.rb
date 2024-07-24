@@ -11,7 +11,7 @@ module JekyllPreModule
     result
   end
 
-  class ExecTag < JekyllSupport::JekyllTag
+  class ExecTag < ::JekyllSupport::JekyllTag
     include JekyllPreVersion
 
     def self.remove_html_tags(string)
@@ -21,7 +21,7 @@ module JekyllPreModule
     def render_impl
       parse_args
       @original_command = @helper.remaining_markup_original
-      command = JekyllPluginHelper.expand_env @original_command
+      command = ::JekyllSupport::JekyllPluginHelper.expand_env @original_command
       if command.strip.empty?
         msg = "Command is empty on on line #{@line_number} (after front matter) of #{@page['path']}"
         unless @die_if_error
@@ -73,7 +73,7 @@ module JekyllPreModule
 
     def parse_args
       @cd = @helper.parameter_specified? 'cd'
-      @cd = JekyllPluginHelper.expand_env(@cd) if @cd
+      @cd = ::JekyllSupport::JekyllPluginHelper.expand_env(@cd) if @cd
 
       @no_escape      = @helper.parameter_specified? 'no_escape'
       @no_strip       = @helper.parameter_specified? 'no_strip'
@@ -116,6 +116,6 @@ module JekyllPreModule
       stdout_str
     end
 
-    JekyllPluginHelper.register(self, 'exec')
+    ::JekyllSupport::JekyllPluginHelper.register(self, 'exec')
   end
 end

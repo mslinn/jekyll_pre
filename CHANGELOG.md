@@ -1,5 +1,10 @@
 # Change Log
 
+## 1.4.6
+
+* Made compatible with `jekyll_plugin_support` v0.8.7
+
+
 ## 1.4.5
 
 * Restored implicit labels

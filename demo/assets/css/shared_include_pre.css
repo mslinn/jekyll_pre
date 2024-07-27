@@ -91,6 +91,12 @@ code.dark {
   padding: 2px;
 }
 
+.dark .bg_yellow,
+.dark .bg_yellow_nopad {
+  color: black;
+}
+
+
 pre.dark .unselectable,
 pre.dark .unselectable > code {
   color: rgb(155, 150, 150);

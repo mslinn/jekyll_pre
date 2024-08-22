@@ -3,6 +3,7 @@
 ## 1.4.7
 
 * `dark` and `bg_yellow` css tags now have black text.
+* `exec` works again.
 
 
 ## 1.4.6

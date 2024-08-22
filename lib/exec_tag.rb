@@ -1,4 +1,5 @@
 require 'jekyll_plugin_support'
+require 'open3'
 require 'rack/utils'
 require_relative 'jekyll_pre/version'
 

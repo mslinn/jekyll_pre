@@ -56,6 +56,7 @@ module JekyllPreModule
       @dark             = ' dark' if option 'dark'
       @dedent           = option 'dedent'
       @highlight        = option 'highlight'
+      @id               = option 'id'
       @make_copy_button = option 'copyButton'
       @number_lines     = option 'number'
       @style            = option 'style'
@@ -106,7 +107,7 @@ module JekyllPreModule
       pre_content = "#{copy_button}#{content}"
       attribution = @helper.attribute if @helper.attribution
       <<~END_OUTPUT
-        <div class="jekyll_pre#{@wrapper_class}" #{@wrapper_style}>
+        <div class="jekyll_pre#{@wrapper_class}" #{@wrapper_style}#{" id='#{@id}'" if @id}>
         #{@label}
         <pre data-lt-active='false' class='#{classes}'#{@style} id='#{pre_id}'>#{pre_content}</pre>
         #{attribution}

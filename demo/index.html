@@ -3,22 +3,34 @@ description: Jekyll pre plugin demo
 layout: default
 title: Welcome
 ---
-<!-- #region implicit label -->
-<h2 id="il">Implicit Label</h2>
+<!-- #region id -->
+<h2 id="id">Id</h2>
 <p>
-  The following should be labeled with <code>This is an implicit label</code>.
+  <a href=#myid>Jump to <code>myid</code></a>.
 </p>
-{% pre This is an implicit label %}
+{% pre id="myid" label="This has label 'myid'" %}
 blah blah blah
 {% endpre %}
 
 
+<p>
+  <a href=#myid2>Jump to <code>myid2</code></a>.
+</p>
+{% pre id="myid2" %}
+This has label myid2.
+{% endpre %}
+<!-- endregion -->
+
+
+<!-- #region Explicit label -->
+<h2 id="el">Explicit Label</h2>
 {% pre label="This is an explicit label" %}
 blah blah blah
 {% endpre %}
 <!-- endregion -->
 
-<!-- #region dedent -->
+
+<!-- #region Dedent -->
 <h2 id="dedent">Dedent</h2>
 {% pre copyButton label="dedent test (leading spaces removed)" %}
           These lines were indented by 10 spaces, but none should be displayed.

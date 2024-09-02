@@ -1,5 +1,10 @@
 # Change Log
 
+## 1.4.8
+
+* `id` option added.
+
+
 ## 1.4.7
 
 * `dark` and `bg_yellow` css tags now have black text.

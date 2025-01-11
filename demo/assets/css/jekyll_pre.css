@@ -21,8 +21,13 @@ ol li .codeLabel {
 .jekyll_pre + p,
 .jekyll_pre + ul,
 .jekyll_pre + ol,
-.jekyll_pre + dl {
-  margin-top: 1em;
+.jekyll_pre + dl,
+.jekyll_pre + span.emoji + div,
+.jekyll_pre + span.emoji + p,
+.jekyll_pre + span.emoji + ul,
+.jekyll_pre + span.emoji + ol,
+.jekyll_pre + span.emoji + dl {
+  margin-top: 20px;
 }
 
 .pre_tag {

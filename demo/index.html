@@ -3,6 +3,15 @@ description: Jekyll pre plugin demo
 layout: default
 title: Welcome
 ---
+<!-- #region Space after noselect -->
+<h2 id="noselspace">Space after noselect</h2>
+{% pre attribution copyButton label="noselect space after" %}
+{% noselect %}Default prompt.
+{% noselect mslinn@gojira ~ $ %}Specified prompt.
+{% endpre %}
+<!-- endregion -->
+
+
 <!-- #region id -->
 <h2 id="id">Id</h2>
 <p>

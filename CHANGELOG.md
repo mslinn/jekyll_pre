@@ -1,5 +1,10 @@
 # Change Log
 
+## 1.4.9 (in progress)
+
+* Added CSS for jekyll_emoji_tag in `demo/assets/css/jekyll_pre.css`.
+* Added a space after `prompt`, when specified like this: `{% noselect prompt %}`.
+
 ## 1.4.8
 
 * `id` option added.

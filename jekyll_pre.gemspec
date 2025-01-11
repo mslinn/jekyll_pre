@@ -1,4 +1,3 @@
-require 'jekyll'
 require_relative 'lib/jekyll_pre/version'
 
 Gem::Specification.new do |spec|
@@ -34,6 +33,6 @@ Gem::Specification.new do |spec|
   spec.version               = JekyllPreVersion::VERSION
 
   spec.add_dependency 'jekyll', '>= 3.5.0'
-  spec.add_dependency 'jekyll_plugin_support', '>= 1.0.0'
-  spec.add_dependency 'rack'
+  spec.add_dependency 'jekyll_plugin_support', '>= 1.0.3'
+  # spec.add_dependency 'rack'
 end

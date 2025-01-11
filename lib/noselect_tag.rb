@@ -9,7 +9,11 @@ module JekyllPreModule
 
     def render_impl
       text = @argument_string
-      text = '$ ' if text.nil? || text.empty?
+      text = if text.nil? || text.empty?
+               '$ '
+             else
+               "#{text} "
+             end
       "<span class='unselectable'>#{text}</span>"
     end
 

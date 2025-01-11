@@ -1,12 +1,10 @@
 source 'https://rubygems.org'
 
-gem 'confidential_info_redactor'
 gem 'ffi'
-gem 'jekyll', '>= 4.3.2'
-gem 'nokogumbo', '=2.0.3'
+gem 'jekyll', '>= 4.3.4'
 
 group :jekyll_plugins do
-  gem 'html-proofer'
+  # gem 'html-proofer'
   gem 'jekyll-assets'
   gem 'jekyll_draft'
   gem 'jekyll-environment-variables'

@@ -27,11 +27,11 @@ Gem::Specification.new do |spec|
 
   END_MESSAGE
   spec.require_paths         = ['lib']
-  spec.required_ruby_version = '>= 2.6.0'
+  spec.required_ruby_version = '>= 3.2.0'
   spec.summary               = 'Jekyll tags pre and noselect, for HTML <pre/> tag, prompts and unselectable text. Can number lines.'
   spec.test_files            = spec.files.grep(%r{^(test|spec|features)/})
   spec.version               = JekyllPreVersion::VERSION
 
-  spec.add_dependency 'jekyll', '>= 3.5.0'
-  spec.add_dependency 'jekyll_plugin_support', '>= 1.0.3'
+  spec.add_dependency 'jekyll', '>= 4.4.1'
+  spec.add_dependency 'jekyll_plugin_support', '>= 3.0.0'
 end

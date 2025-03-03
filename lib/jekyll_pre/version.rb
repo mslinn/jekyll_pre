@@ -1,3 +1,3 @@
 module JekyllPreVersion
-  VERSION = '1.4.9'.freeze
+  VERSION = '3.0.0'.freeze
 end

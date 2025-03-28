@@ -29,7 +29,7 @@ Contents of pre tag
     * {% pre label="This is a label" %}<br>Contents of pre tag<br>{% endpre %}
 
     * {% pre This is a label %}<br>Contents of pre tag<br>{% endpre %}
-  * `number` &ndash; Number the lines
+  * `number` &ndash; Number the lines with an optional starting value (defaults to 1)
   * `shell` &ndash; Equivalent to `label='Shell'`
   * `style` &ndash; Apply inline CSS styles
 

@@ -1,6 +1,12 @@
 # Change Log
 
-## 3.0.0 / In process
+## 3.0.1 / 2025-03-28
+
+* The `number` option now accepts an optional starting value.
+  This option can still be used as a keyword option.
+
+
+## 3.0.0 / 2025-03-06
 
 * Numbered as v3.0.0 to match the `jekyll_plugin_support` version number.
 * Now requires [Jekyll 4.4.1](https://jekyllrb.com/news/2025/01/29/jekyll-4-4-1-released/) or later,

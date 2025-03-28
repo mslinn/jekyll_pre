@@ -2,9 +2,9 @@ module JekyllPluginPreName
   PLUGIN_NAME = 'jekyll_pre'.freeze
 end
 
-require_relative './exec_tag'
-require_relative './noselect_tag'
-require_relative './pre_tag_block'
+require_relative 'exec_tag'
+require_relative 'noselect_tag'
+require_relative 'pre_tag_block'
 
 PreError = Class.new(Liquid::Error)
 

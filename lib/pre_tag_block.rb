@@ -18,13 +18,22 @@ module JekyllPreModule
       "#{@@prefix}'##{pre_id}'#{@@suffix}"
     end
 
-    def self.number_content(content)
+    def self.positive_int?(x)
+      value = begin
+        Integer(x)
+      rescue StandardError
+        false
+      end
+      value.is_a?(Integer) && value.positive?
+    end
+
+    def self.number_content(content, start_value)
       lines = content.split("\n")
       digits = lines.length.to_s.length
-      i = 0
+      i = PreTagBlock.positive_int?(start_value) ? start_value.to_i : 1
       numbered_content = lines.map do |line|
-        i += 1
         number = i.to_s.rjust(digits, ' ')
+        i += 1
         "<span class='unselectable numbered_line'> #{number}: </span>#{line}"
       end
       result = numbered_content.join("\n")
@@ -101,7 +110,7 @@ module JekyllPreModule
       pre_id = "id#{SecureRandom.hex(6)}"
       copy_button = @make_copy_button ? PreTagBlock.make_copy_button(pre_id) : ''
       content = PreTagBlock.highlight(content, @highlight) if @highlight
-      content = PreTagBlock.number_content(content) if @number_lines
+      content = PreTagBlock.number_content(content, @number_lines) if @number_lines
 
       classes = "maxOneScreenHigh copyContainer#{@dark}#{pre_clear}#{@class}"
       pre_content = "#{copy_button}#{content}"

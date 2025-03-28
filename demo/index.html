@@ -209,7 +209,7 @@ This is line 3 of noselect %}
 <hr>
 
 <!-- #region numbered lines -->
-{% pre copyButton number label="Numbered lines" %}
+{% pre copyButton number label="Numbered lines starting at the default (1)" %}
 Line 1
   Line 2
     Line 3
@@ -217,6 +217,18 @@ Line 1
     Line 5
   Line 6
 Line 7
+{% endpre %}
+<!-- endregion -->
+
+<!-- #region numbered lines -->
+{% pre copyButton number='42' label="Numbered lines starting at 42" %}
+Line 42
+  Line 43
+    Line 44
+      Line 45
+    Line 46
+  Line 47
+Line 48
 {% endpre %}
 <!-- endregion -->
 

@@ -27,7 +27,7 @@ module JekyllPreModule
       value.is_a?(Integer) && value.positive?
     end
 
-    def self.number_content(content, start_value)
+    def self.number_content(content, start_value = 1)
       lines = content.split("\n")
       digits = lines.length.to_s.length
       i = PreTagBlock.positive_int?(start_value) ? start_value.to_i : 1

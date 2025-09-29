@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Run all rspec tests
+# See https://mslinn.com/jekyll_plugins/jekyll_plugin_support.html#testing
 
 DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 cd "$DIR/../" || exit

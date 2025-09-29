@@ -38,8 +38,9 @@
     },
     {
       "args": [
-        "-I",
-        "${workspaceRoot}"
+        "-I", "${workspaceRoot}/lib",
+        "-I", "${workspaceRoot}/spec",
+        "-P", "${workspaceRoot}/spec/**/*_spec.rb"
       ],
       "debugPort": "0",
       "name": "RSpec - all",
@@ -50,12 +51,12 @@
     },
     {
       "args": [
-        "-I",
-        "${workspaceRoot}",
+        "-I", "${workspaceRoot}/lib",
+        "-I", "${workspaceRoot}/spec",
         "${file}"
       ],
       "debugPort": "0",
-      "name": "RSpec - active spec file only",
+      "name": "RSpec - active spec only",
       "request": "launch",
       "script": "${workspaceRoot}/binstub/rspec",
       "type": "rdbg",

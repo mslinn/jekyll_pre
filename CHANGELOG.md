@@ -1,5 +1,9 @@
 # Change Log
 
+## 3.0.2 / 2026-07-12
+
+* Compatible with jekyll_plugin_support v3.1.1
+
 ## 3.0.1 / 2025-03-28
 
 * The `number` option now accepts an optional starting value.
